@@ -4,7 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity
-        implements StartFragment.OnStartPageButtonClickedListener
+        implements StartFragment.OnStartPageButtonClickedListener,
+        NewGameFrag.OnNewGameScreenInteractionListener
 {
 
     @Override
@@ -21,10 +22,36 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onButtonClicked(int i)
     {
-        // New Game
+        switch(i)
+        {
+            // New Game
+            case 0:
+                getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, new NewGameFrag())
+                    .addToBackStack("newTrans").commit();
+                break;
+            // Load Game
+            case 1:
 
-        // Load Game
+                break;
 
-        // How-To
+            // How-To
+            case 2:
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void onNewSettings()
+    {
+        // Show new settings screen
+    }
+
+    @Override
+    public void onNewGameWithSettings(int settingsIndex)
+    {
+        // Start a new game with settings from database
     }
 }
