@@ -5,7 +5,8 @@ import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity
         implements StartFragment.OnStartPageButtonClickedListener,
-        NewGameFrag.OnNewGameScreenInteractionListener
+        NewGameFrag.OnNewGameScreenInteractionListener,
+        EditNimRules.OnEditRulesListener
 {
 
     @Override
@@ -46,6 +47,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onNewSettings()
     {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, new EditNimRules())
+                .addToBackStack("editNimRules").commit();
+
         // Show new settings screen
     }
 
@@ -53,5 +58,17 @@ public class MainActivity extends AppCompatActivity
     public void onNewGameWithSettings(int settingsIndex)
     {
         // Start a new game with settings from database
+    }
+
+    @Override
+    public void onRulesSaved()
+    {
+
+    }
+
+    @Override
+    public void onCancel()
+    {
+
     }
 }

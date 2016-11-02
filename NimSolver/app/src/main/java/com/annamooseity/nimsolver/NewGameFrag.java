@@ -4,14 +4,16 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 // Created by Anna Carrigan
 // Oct 31, 2016
 
-public class NewGameFrag extends Fragment
+public class NewGameFrag extends ListFragment
 {
 
     private OnNewGameScreenInteractionListener mListener;
@@ -27,7 +29,25 @@ public class NewGameFrag extends Fragment
                              Bundle savedInstanceState)
     {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_new_game, container, false);
+        View view = inflater.inflate(R.layout.fragment_new_game, container, false);
+
+        view.findViewById(R.id.addRules).setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                mListener.onNewSettings();
+            }
+        });
+
+        return view;
+    }
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id)
+    {
+        super.onListItemClick(l, v, position, id);
+        mListener.onNewGameWithSettings(position + 1);
     }
 
     @Override

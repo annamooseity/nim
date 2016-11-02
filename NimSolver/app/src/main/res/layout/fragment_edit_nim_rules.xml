@@ -1,13 +1,262 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              tools:context="com.annamooseity.nimsolver.EditNimRules">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="New Set of Nim Rules"
+        android:id="@+id/title"
+        android:layout_marginTop="22dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="How many piles?"
+        android:id="@+id/howManyPilesTxt"
+        android:layout_below="@+id/title"
+        android:textSize="20dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="18dp"/>
+
+    <TextView
+        android:layout_width="30dp"
+        android:textSize="22dp"
+        android:textColor="@color/colorAccent"
+        android:layout_height="wrap_content"
+        android:text="1"
+        android:id="@+id/sliderText"
+        android:layout_alignBottom="@+id/howManyPilesTxt"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"/>
+
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/numPilePicker"
+        android:layout_below="@+id/howManyPilesTxt"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:max="5"
+        android:theme="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_marginTop="16dp"/>
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pile 1"
+        android:id="@+id/lPile1"
+        android:layout_below="@+id/numPilePicker"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textSize="20dp"
+        android:layout_marginTop="48dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/pile1"
+        android:layout_toEndOf="@+id/lPile1"
+        android:layout_toRightOf="@+id/lPile1"
+        android:layout_toStartOf="@+id/lPile4"
+        android:layout_toLeftOf="@+id/lPile4"
+        android:inputType="number"
+        android:layout_alignBaseline="@+id/lPile1"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pile 4"
+        android:id="@+id/lPile4"
+        android:layout_alignTop="@+id/lPile1"
+        android:textSize="20dp"
+        android:layout_centerHorizontal="true"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/pile4"
+        android:layout_toEndOf="@+id/lPile4"
+        android:layout_toRightOf="@+id/lPile4"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:inputType="number"
+        android:layout_alignBaseline="@+id/lPile4"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pile 2"
+        android:id="@+id/lPile2"
+        android:textSize="20dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/lPile1"
+        android:layout_marginRight="81dp"
+        android:layout_marginEnd="81dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/pile2"
+        android:layout_toEndOf="@+id/lPile1"
+        android:layout_toRightOf="@+id/lPile1"
+        android:layout_toStartOf="@+id/lPile4"
+        android:layout_toLeftOf="@+id/lPile4"
+        android:inputType="number"
+        android:layout_alignBaseline="@+id/lPile2"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pile 5"
+        android:textSize="20dp"
+        android:id="@+id/lPile5"
+        android:layout_above="@+id/lPile3"
+        android:layout_alignRight="@+id/lPile4"
+        android:layout_alignEnd="@+id/lPile4"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/pile5"
+        android:layout_toEndOf="@+id/lPile4"
+        android:layout_toRightOf="@+id/lPile4"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:inputType="number"
+        android:layout_alignBaseline="@+id/lPile5"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pile 3"
+        android:textSize="20dp"
+        android:id="@+id/lPile3"
+        android:layout_below="@+id/lPile2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/pile3"
+        android:layout_toEndOf="@+id/lPile1"
+        android:layout_toRightOf="@+id/lPile1"
+        android:layout_toStartOf="@+id/lPile4"
+        android:layout_toLeftOf="@+id/lPile4"
+        android:inputType="number"
+        android:layout_alignBaseline="@+id/lPile3"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pile 6"
+        android:textSize="20dp"
+        android:id="@+id/lPile6"
+        android:layout_centerHorizontal="true"
+        android:layout_alignBottom="@+id/lPile3"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/pile6"
+        android:layout_toEndOf="@+id/lPile4"
+        android:layout_toRightOf="@+id/lPile4"
+        android:layout_alignParentEnd="true"
+        android:inputType="number"
+        android:layout_alignParentRight="true"
+        android:layout_alignBaseline="@+id/lPile6"/>
+
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Play Against AI"
+        android:id="@+id/aiSwitch"
+        android:layout_marginTop="74dp"
+        android:textSize="20dp"
+        android:layout_alignLeft="@+id/lPile3"
+        android:layout_alignStart="@+id/lPile3"
+        android:layout_centerVertical="true"
+        android:checked="true"/>
+
+    <ViewSwitcher
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/playerNameSwitcher"
+        android:layout_below="@+id/aiSwitch">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="Other Player's name: "/>
+
+            <EditText
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/otherPlayerName"/>
+        </LinearLayout>
+
+
+
+    </ViewSwitcher>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Who Plays First?"
+        android:id="@+id/whoPlaysFirstText"
+        android:textSize="20dp"
+        android:layout_below="@+id/playerNameSwitcher"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="24dp"/>
+
+    <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"/>
+        android:id="@+id/radioGroup"
+        android:layout_below="@+id/whoPlaysFirstText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
-</FrameLayout>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="You"
+            android:textSize="20dp"
+            android:id="@+id/player1Radio"
+            android:checked="true"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Other Player"
+            android:textSize="20dp"
+            android:id="@+id/player2Radio"
+            android:checked="false"/>
+    </RadioGroup>
+
+
+
+
+</RelativeLayout>
