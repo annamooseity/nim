@@ -191,7 +191,7 @@
         android:textSize="18dp"
         android:hint="Separate values with commas."
         android:inputType="number"
-        android:digits="1234567890, "
+        android:digits="1234567890,"
         android:layout_below="@id/howManyCanYouTakeTxt"
         android:id="@+id/takeOptions"/>
 

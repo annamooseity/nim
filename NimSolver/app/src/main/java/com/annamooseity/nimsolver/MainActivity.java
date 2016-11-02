@@ -75,14 +75,14 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onRulesSaved()
+    public void onRulesSaved(NimRules rules)
     {
-
+     // Save the rules to the content provider
     }
 
     @Override
     public void onCancel()
     {
-
+        super.onBackPressed();
     }
 }
