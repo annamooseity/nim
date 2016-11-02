@@ -52,12 +52,25 @@ public class NimRules
     private String otherPlayer;
     private boolean vsAI;
 
-    public NimRules(int[] piles, int[] takeOptions, String otherPlayerName, boolean vsAI)
+    public int getFirstPlayer()
+    {
+        return firstPlayer;
+    }
+
+    public void setFirstPlayer(int firstPlayer)
+    {
+        this.firstPlayer = firstPlayer;
+    }
+
+    private boolean player1First;
+
+    public NimRules(int[] piles, int[] takeOptions, String otherPlayerName, boolean vsAI, boolean player1first)
     {
         this.piles = piles;
         this.takeOptions = takeOptions;
         this.otherPlayer = otherPlayerName;
         this.vsAI = vsAI;
+        this.firstPlayer = firstPlayer;
     }
 
 

@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.Switch;
@@ -29,6 +30,8 @@ import org.w3c.dom.Text;
 public class EditNimRules extends Fragment
 {
 
+    private boolean isLoaded = false;
+
     private NimRules rules;
     private EditText p1, p2, p3, p4, p5, p6, otherPlayerName, takeOptions;
     private TextView l1, l2, l3, l4, l5, l6;
@@ -40,7 +43,7 @@ public class EditNimRules extends Fragment
     private EditText[] piles;
     private TextView[] pilesLabels;
 
-    private RadioGroup firstPlayerRadios;
+    private RadioButton firstPlayerRadio;
 
 
     private OnEditRulesListener mListener;
@@ -90,6 +93,7 @@ public class EditNimRules extends Fragment
             }
         });
 
+        firstPlayerRadio = (RadioButton) view.findViewById(R.id.player1Radio);
         seekBar.setProgress(0);
         setNumPiles(0);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
@@ -173,6 +177,11 @@ public class EditNimRules extends Fragment
         mListener = null;
     }
 
+    public void setRules(NimRules rules)
+    {
+
+    }
+
     private NimRules getRules()
     {
         boolean valid = true;
@@ -210,7 +219,7 @@ public class EditNimRules extends Fragment
 
         if(valid)
         {
-            return new NimRules(pileAmts, takeOpts, opponent, playingAI);
+            return new NimRules(pileAmts, takeOpts, opponent, playingAI, firstPlayerRadio.isChecked());
         }
         else
         {
