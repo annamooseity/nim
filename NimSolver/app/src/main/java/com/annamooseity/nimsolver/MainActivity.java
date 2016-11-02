@@ -1,5 +1,6 @@
 package com.annamooseity.nimsolver;
 
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -38,6 +39,13 @@ public class MainActivity extends AppCompatActivity
 
             // How-To
             case 2:
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+                builder.setCancelable(false);
+                builder.setTitle("How to play Nim");
+                builder.setMessage("Here is how you play Nim. Blah blah blah blah.");
+                builder.setPositiveButton("Got it!", null);
+                builder.show();
                 break;
             default:
                 break;
