@@ -32,7 +32,7 @@ public class EditNimRules extends Fragment
 
     private boolean isLoaded = false;
 
-    private NimRules rules;
+    private NimRules rules = null;
     private EditText p1, p2, p3, p4, p5, p6, otherPlayerName, takeOptions;
     private TextView l1, l2, l3, l4, l5, l6;
     private SeekBar seekBar;
@@ -134,6 +134,12 @@ public class EditNimRules extends Fragment
                 mListener.onCancel();
             }
         });
+
+        if(isLoaded)
+        {
+            loadRules();
+        }
+
         return view;
     }
 
@@ -179,7 +185,43 @@ public class EditNimRules extends Fragment
 
     public void setRules(NimRules rules)
     {
+        this.rules = rules;
+        isLoaded = true;
+    }
 
+    private void loadRules()
+    {
+        setNumPiles(rules.getPiles().length);
+        for(int i = 0; i < numPiles; i++)
+        {
+            piles[i].setText("" + rules.getPiles()[i]);
+        }
+        StringBuilder s = new StringBuilder();
+        for(int i = 0; i < rules.getTakeOptions().length; i++)
+        {
+            s.append(rules.getTakeOptions()[i]);
+            s.append(",");
+        }
+        s.deleteCharAt(s.length());
+        takeOptions.setText(s.toString());
+
+        if(rules.isPlayer1First())
+        {
+            firstPlayerRadio.setChecked(true);
+        }
+        else
+        {
+            firstPlayerRadio.setChecked(false);
+        }
+        if(rules.isVsAI())
+        {
+            playAI.setChecked(true);
+        }
+        else
+        {
+            playAI.setChecked(false);
+            otherPlayerName.setText(rules.getOtherPlayer());
+        }
     }
 
     private NimRules getRules()

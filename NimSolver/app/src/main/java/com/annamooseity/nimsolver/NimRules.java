@@ -52,12 +52,12 @@ public class NimRules
     private String otherPlayer;
     private boolean vsAI;
 
-    public boolean getFirstPlayer()
+    public boolean isPlayer1First()
     {
         return player1First;
     }
 
-    public void setFirstPlayer(boolean firstPlayer)
+    public void setPlayer1First(boolean firstPlayer)
     {
         this.player1First = firstPlayer;
     }
