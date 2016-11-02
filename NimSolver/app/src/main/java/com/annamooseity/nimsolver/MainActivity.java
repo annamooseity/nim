@@ -43,7 +43,13 @@ public class MainActivity extends AppCompatActivity
 
                 builder.setCancelable(false);
                 builder.setTitle("How to play Nim");
-                builder.setMessage("Here is how you play Nim. Blah blah blah blah.");
+                builder.setMessage("Nim, a mathematical game of strategy, is not a difficult " +
+                        "game to learn even if you are allergic to math. \n \n" +
+                        "Players take turns removing coins, chips, or beans from the piles. " +
+                        "The amount of chips you can remove on your turn depends on the rules " +
+                        "set in the beginning. If there are multiple piles, you can only take " +
+                        "chips from one pile. \n \n" +
+                        "The player to take the last chip is the winner!");
                 builder.setPositiveButton("Got it!", null);
                 builder.show();
                 break;
