@@ -1,5 +1,7 @@
 package com.annamooseity.nimsolver;
 
+import android.net.Uri;
+
 /**
  * Created by Anna on 10/31/2016.
  */
@@ -7,6 +9,19 @@ package com.annamooseity.nimsolver;
 // Container class for rules of nim
 public class NimRules
 {
+    public static String TAKE_OPTIONS = "takeOpts";
+    public static String OTHER_PLAYER = "otherPlayer";
+    public static String PILES = "piles";
+    public static String PLAYER_FIRST = "firstPlayer";
+    public static String RULES_ID = "_id";
+    public static final Uri CONTENT_URI_rules= Uri.parse("content://"+ NimProvider.PROVIDER+"/rules/1");
+    public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.annamooseity.rules";
+    private int[] piles;
+    private int[] takeOptions;
+    private String otherPlayer;
+    private boolean vsAI;
+    private boolean player1First;
+
     public int[] getPiles()
     {
         return piles;
@@ -47,10 +62,6 @@ public class NimRules
         this.vsAI = vsAI;
     }
 
-    private int[] piles;
-    private int[] takeOptions;
-    private String otherPlayer;
-    private boolean vsAI;
 
     public boolean isPlayer1First()
     {
@@ -62,7 +73,7 @@ public class NimRules
         this.player1First = firstPlayer;
     }
 
-    private boolean player1First;
+
 
     public NimRules(int[] piles, int[] takeOptions, String otherPlayerName, boolean vsAI, boolean player1first)
     {
