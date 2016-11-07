@@ -1,3 +1,5 @@
+package com.annamooseity.nimsolver;
+
 import com.annamooseity.nimsolver.NimRules;
 
 /**

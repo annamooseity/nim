@@ -1,0 +1,53 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context="com.annamooseity.nimsolver.PlayFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/turnDisplay"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="10dp"
+        android:textSize="30dp"
+        android:text="Player Whoever's Turn"/>
+    
+    <com.annamooseity.nimsolver.GameView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/turnDisplay"
+        android:layout_above="@+id/outcomeInfo"
+        android:id="@+id/gameView"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/outcomeInfo"
+        android:textSize="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_above="@id/messageToUser"
+        android:text="Outcome here blah blah"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/messageToUser"
+        android:textSize="20dp"
+        android:layout_above="@id/takeOptionsSpinner"
+        android:text="How many chips do you want to take?"/>
+    
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="30dp"
+        android:textSize="20dp"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/takeOptionsSpinner">
+    </Spinner>
+
+
+</RelativeLayout>

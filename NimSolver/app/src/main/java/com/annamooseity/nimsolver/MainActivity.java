@@ -7,7 +7,8 @@ import android.os.Bundle;
 public class MainActivity extends AppCompatActivity
         implements StartFragment.OnStartPageButtonClickedListener,
         NewGameFrag.OnNewGameScreenInteractionListener,
-        EditNimRules.OnEditRulesListener
+        EditNimRules.OnEditRulesListener,
+        PlayFragment.OnGamePlayListener
 {
 
     @Override
@@ -84,5 +85,17 @@ public class MainActivity extends AppCompatActivity
     public void onCancel()
     {
         super.onBackPressed();
+    }
+
+    @Override
+    public void onGameOver(NimGame game)
+    {
+
+    }
+
+    @Override
+    public void onSaveGame(NimGame game)
+    {
+
     }
 }
