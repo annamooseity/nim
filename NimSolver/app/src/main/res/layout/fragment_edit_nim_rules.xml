@@ -195,58 +195,13 @@
         android:layout_below="@id/howManyCanYouTakeTxt"
         android:id="@+id/takeOptions"/>
 
-    <Switch
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/takeOptions"
-        android:text="Play Against AI"
-        android:id="@+id/aiSwitch"
-        android:layout_marginTop="10dp"
-        android:textSize="20dp"
-        android:layout_alignLeft="@+id/lPile3"
-        android:layout_alignStart="@+id/lPile3"
-        android:layout_centerVertical="true"
-        android:checked="true"/>
-
-    <ViewSwitcher
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/playerNameSwitcher"
-        android:layout_below="@+id/aiSwitch">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"></LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:text="Other Player's name: "/>
-
-            <EditText
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/otherPlayerName"/>
-        </LinearLayout>
-
-
-
-    </ViewSwitcher>
-
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Who Plays First?"
         android:id="@+id/whoPlaysFirstText"
         android:textSize="20dp"
-        android:layout_below="@+id/playerNameSwitcher"
+        android:layout_below="@+id/takeOptions"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="24dp"/>

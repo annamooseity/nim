@@ -33,12 +33,10 @@ public class EditNimRules extends Fragment
     private boolean isLoaded = false;
 
     private NimRules rules = null;
-    private EditText p1, p2, p3, p4, p5, p6, otherPlayerName, takeOptions;
+    private EditText p1, p2, p3, p4, p5, p6, takeOptions;
     private TextView l1, l2, l3, l4, l5, l6;
     private SeekBar seekBar;
     private TextView seekBarVal;
-    private Switch playAI;
-    private ViewSwitcher playAISwitcher;
     private int numPiles = 1;
     private EditText[] piles;
     private TextView[] pilesLabels;
@@ -80,18 +78,7 @@ public class EditNimRules extends Fragment
         takeOptions = (EditText) view.findViewById(R.id.takeOptions);
         seekBarVal = (TextView) view.findViewById(R.id.sliderText);
 
-        otherPlayerName = (EditText) view.findViewById(R.id.otherPlayerName);
         seekBar = (SeekBar) view.findViewById(R.id.numPilePicker);
-        playAI = (Switch) view.findViewById(R.id.aiSwitch);
-        playAISwitcher = (ViewSwitcher) view.findViewById(R.id.playerNameSwitcher);
-        playAI.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
-        {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b)
-            {
-                playAISwitcher.showNext();
-            }
-        });
 
         firstPlayerRadio = (RadioButton) view.findViewById(R.id.player1Radio);
         seekBar.setProgress(0);
@@ -213,34 +200,12 @@ public class EditNimRules extends Fragment
         {
             firstPlayerRadio.setChecked(false);
         }
-        if(rules.isVsAI())
-        {
-            playAI.setChecked(true);
-        }
-        else
-        {
-            playAI.setChecked(false);
-            otherPlayerName.setText(rules.getOtherPlayer());
-        }
     }
 
     private NimRules getRules()
     {
         boolean valid = true;
         String opponent = "";
-        boolean playingAI = playAI.isChecked();
-        if(!playingAI)
-        {
-            opponent = otherPlayerName.getText().toString().trim();
-            if(opponent == null || opponent.equals(""))
-            {
-                otherPlayerName.setError("Enter player name.");
-            }
-            else
-            {
-                otherPlayerName.setError(null);
-            }
-        }
 
         int[] takeOpts = getTakeOptions();
         if(takeOpts == null)
@@ -261,7 +226,7 @@ public class EditNimRules extends Fragment
 
         if(valid)
         {
-            return new NimRules(pileAmts, takeOpts, opponent, playingAI, firstPlayerRadio.isChecked());
+            return new NimRules(pileAmts, takeOpts, opponent, firstPlayerRadio.isChecked());
         }
         else
         {

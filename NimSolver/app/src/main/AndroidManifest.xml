@@ -14,7 +14,11 @@
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-        </activity>
+        </activity>v
+
+        <provider android:name=".NimProvider"
+                  android:authorities="com.annamooseity.nim" android:exported="true"/>
+
     </application>
 
 </manifest>

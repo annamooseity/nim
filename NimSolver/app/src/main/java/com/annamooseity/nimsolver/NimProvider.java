@@ -58,7 +58,6 @@ public class NimProvider extends ContentProvider
                     NimRules.RULES_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                     NimRules.PILES + " TEXT," +
                     NimRules.TAKE_OPTIONS + " TEXT," +
-                    NimRules.OTHER_PLAYER + " TEXT," +
                     NimRules.PLAYER_FIRST + " TEXT" + ");");
 
             // Create NimGame table
@@ -66,6 +65,7 @@ public class NimProvider extends ContentProvider
                     NimGame.GAME_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                     NimGame.PILES + " INTEGER," +
                     NimGame.RULES_INDEX + " INTEGER," +
+                    NimRules.OTHER_PLAYER + " TEXT," +
                     NimGame.MOVE + " TEXT" + ");");
         }
 
@@ -268,12 +268,13 @@ public class NimProvider extends ContentProvider
         gameProjectionMap.put(NimGame.PILES, NimGame.PILES);
         gameProjectionMap.put(NimGame.RULES_INDEX, NimGame.RULES_INDEX);
         gameProjectionMap.put(NimGame.MOVE, NimGame.MOVE);
+        gameProjectionMap.put(NimRules.OTHER_PLAYER, NimRules.OTHER_PLAYER);
 
          rulesProjectionMap = new HashMap<String, String>();
          rulesProjectionMap.put(NimRules.RULES_ID, NimRules.RULES_ID);
          rulesProjectionMap.put(NimRules.PILES, NimRules.PILES);
          rulesProjectionMap.put(NimRules.PLAYER_FIRST, NimRules.PLAYER_FIRST);
          rulesProjectionMap.put(NimRules.TAKE_OPTIONS, NimRules.TAKE_OPTIONS);
-         rulesProjectionMap.put(NimRules.OTHER_PLAYER, NimRules.OTHER_PLAYER);
+
     }
 }
