@@ -65,7 +65,7 @@ public class NimProvider extends ContentProvider
                     NimGame.GAME_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                     NimGame.PILES + " INTEGER," +
                     NimGame.RULES_INDEX + " INTEGER," +
-                    NimRules.OTHER_PLAYER + " TEXT," +
+                    NimGame.OPPONENT + " TEXT," +
                     NimGame.MOVE + " TEXT" + ");");
         }
 
@@ -258,8 +258,8 @@ public class NimProvider extends ContentProvider
     static
     {
         sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
-        sUriMatcher.addURI(PROVIDER, "Accounts/transactions/1", GAME);
-        sUriMatcher.addURI(PROVIDER, "Accounts/transactions/1" + "/#", GAME_ID);
+        sUriMatcher.addURI(PROVIDER, GAME_TABLE_NAME, GAME);
+        sUriMatcher.addURI(PROVIDER, GAME_TABLE_NAME + "/#", GAME_ID);
         sUriMatcher.addURI(PROVIDER, RULES_TABLE_NAME, RULES);
         sUriMatcher.addURI(PROVIDER, RULES_TABLE_NAME + "/#", RULES_ID);
 
@@ -268,7 +268,7 @@ public class NimProvider extends ContentProvider
         gameProjectionMap.put(NimGame.PILES, NimGame.PILES);
         gameProjectionMap.put(NimGame.RULES_INDEX, NimGame.RULES_INDEX);
         gameProjectionMap.put(NimGame.MOVE, NimGame.MOVE);
-        gameProjectionMap.put(NimRules.OTHER_PLAYER, NimRules.OTHER_PLAYER);
+        gameProjectionMap.put(NimGame.OPPONENT, NimGame.OPPONENT);
 
          rulesProjectionMap = new HashMap<String, String>();
          rulesProjectionMap.put(NimRules.RULES_ID, NimRules.RULES_ID);

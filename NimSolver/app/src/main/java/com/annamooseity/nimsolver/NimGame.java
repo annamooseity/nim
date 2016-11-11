@@ -14,19 +14,50 @@ public class NimGame
     public static String MOVE = "move";
     public static String PILES = "piles";
     public static String GAME_ID = "_id";
+    public static String OPPONENT = "opponent";
     public static final Uri CONTENT_URI_game = Uri.parse("content://"+ NimProvider.PROVIDER+"/games/1");
     public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.annamooseity.game";
-    private NimRules rules;
 
+    private int lastPlayedOn;
+
+    public NimRules getRules()
+    {
+        return rules;
+    }
+
+    public int[] getPiles()
+    {
+        return piles;
+    }
+
+    public int getLastPlayedOn()
+    {
+        return lastPlayedOn;
+    }
+
+    public int getMove()
+    {
+        return move;
+    }
+
+    public String getOtherPlayerName()
+    {
+        return otherPlayerName;
+    }
+
+    private NimRules rules;
     private int[] piles;
     private int move;
     public boolean isOver = false;
+    private String otherPlayerName = "";
 
-    public NimGame(NimRules rules, int[] piles, int move)
+    public NimGame(NimRules rules, int[] piles, int move, String otherPlayerName)
     {
         this.rules = rules;
         this.piles = piles;
         this.move = move;
+        this.otherPlayerName = otherPlayerName;
+        lastPlayedOn = 0;
     }
 
     public void move(int take, int pileIndex)

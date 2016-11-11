@@ -10,7 +10,6 @@ import android.net.Uri;
 public class NimRules
 {
     public static String TAKE_OPTIONS = "takeOpts";
-    public static String OTHER_PLAYER = "otherPlayer";
     public static String PILES = "piles";
     public static String PLAYER_FIRST = "firstPlayer";
     public static String RULES_ID = "_id";
