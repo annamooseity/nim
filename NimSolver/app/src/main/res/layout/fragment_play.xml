@@ -20,24 +20,8 @@
         android:layout_above="@+id/outcomeInfo"
         android:id="@+id/gameView"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/outcomeInfo"
-        android:textSize="20dp"
-        android:layout_marginBottom="10dp"
-        android:layout_above="@id/messageToUser"
-        android:text="Outcome here blah blah"
-        />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:id="@+id/messageToUser"
-        android:textSize="20dp"
-        android:layout_above="@id/takeOptionsSpinner"
-        android:text="How many chips do you want to take?"/>
+
     
     <Spinner
         android:layout_width="match_parent"
@@ -48,6 +32,28 @@
         android:layout_alignParentBottom="true"
         android:id="@+id/takeOptionsSpinner">
     </Spinner>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/messageToUser"
+        android:textSize="20dp"
+        android:layout_above="@id/takeOptionsSpinner"
+        android:text="How many chips do you want to take?"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/outcomeInfo"
+        android:textSize="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_above="@id/messageToUser"
+        android:text="Outcome here blah blah"
+        />
+
+
 
 
 </RelativeLayout>
