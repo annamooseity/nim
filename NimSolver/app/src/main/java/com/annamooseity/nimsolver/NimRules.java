@@ -17,7 +17,18 @@ public class NimRules
     public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.annamooseity.rules";
     private int[] piles;
     private int[] takeOptions;
-    private boolean player1First;
+
+    public int getFirstPlayer()
+    {
+        return firstPlayer;
+    }
+
+    public void setFirstPlayer(int firstPlayer)
+    {
+        this.firstPlayer = firstPlayer;
+    }
+
+    private int firstPlayer;
 
     public int[] getPiles()
     {
@@ -39,21 +50,11 @@ public class NimRules
         this.takeOptions = takeOptions;
     }
 
-    public boolean isPlayer1First()
-    {
-        return player1First;
-    }
-
-    public void setPlayer1First(boolean firstPlayer)
-    {
-        this.player1First = firstPlayer;
-    }
-
-    public NimRules(int[] piles, int[] takeOptions, String otherPlayerName, boolean player1first)
+    public NimRules(int[] piles, int[] takeOptions, String otherPlayerName, int firstPlayer)
     {
         this.piles = piles;
         this.takeOptions = takeOptions;
-        this.player1First = player1first;
+        this.firstPlayer = firstPlayer;
     }
 
 
