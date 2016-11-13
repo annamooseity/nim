@@ -193,12 +193,12 @@ public class NimProvider extends ContentProvider
         {
             case GAME:
                 qb.setTables(GAME_TABLE_NAME);
-                qb.setProjectionMap( rulesProjectionMap);
+                qb.setProjectionMap( gameProjectionMap);
                 notifyUri = NimGame.CONTENT_URI_game;
                 break;
             case GAME_ID:
                 qb.setTables(GAME_TABLE_NAME);
-                qb.setProjectionMap( rulesProjectionMap);
+                qb.setProjectionMap( gameProjectionMap);
                 if (selection != null)
                 {
                     selection = selection + "_id = " + uri.getLastPathSegment();
@@ -207,12 +207,12 @@ public class NimProvider extends ContentProvider
                 break;
             case RULES:
                 qb.setTables(RULES_TABLE_NAME);
-                qb.setProjectionMap(gameProjectionMap);
+                qb.setProjectionMap(rulesProjectionMap);
                 notifyUri = NimRules.CONTENT_URI_rules;
                 break;
             case RULES_ID:
                 qb.setTables(RULES_TABLE_NAME);
-                qb.setProjectionMap(gameProjectionMap);
+                qb.setProjectionMap(rulesProjectionMap);
                 if (selection != null)
                 {
                     selection = selection + "_id = " + uri.getLastPathSegment();

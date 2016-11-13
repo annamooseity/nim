@@ -16,6 +16,7 @@ public class NimRules
     public static final Uri CONTENT_URI_rules= Uri.parse("content://"+ NimProvider.PROVIDER+"/rules/1");
     public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.annamooseity.rules";
     public static String[] projection = new String[]{RULES_ID, PILES, TAKE_OPTIONS, PLAYER_FIRST};
+    public static String[] no_id_projection = new String[]{PILES, TAKE_OPTIONS, PLAYER_FIRST};
     private int[] piles;
     private int[] takeOptions;
 
@@ -51,7 +52,7 @@ public class NimRules
         this.takeOptions = takeOptions;
     }
 
-    public NimRules(int[] piles, int[] takeOptions, String otherPlayerName, int firstPlayer)
+    public NimRules(int[] piles, int[] takeOptions, int firstPlayer)
     {
         this.piles = piles;
         this.takeOptions = takeOptions;

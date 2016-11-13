@@ -1,5 +1,6 @@
 package com.annamooseity.nimsolver;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -109,6 +110,11 @@ public class EditNimRules extends Fragment
             @Override
             public void onClick(View view)
             {
+                // Save the rules
+                NimRules rules = getRules();
+                String[] values = {rules.getPiles().toString(), rules.getTakeOptions().toString(), Integer.toString(rules.getFirstPlayer())};
+                ContentValues cv = MainActivity.createData(NimRules.no_id_projection, values);
+                getActivity().getContentResolver().insert(NimRules.CONTENT_URI_rules, cv);
                 mListener.onRulesSaved(getRules());
             }
         });
@@ -192,7 +198,7 @@ public class EditNimRules extends Fragment
         s.deleteCharAt(s.length());
         takeOptions.setText(s.toString());
 
-        if(rules.isPlayer1First())
+        if(rules.getFirstPlayer() == 1)
         {
             firstPlayerRadio.setChecked(true);
         }
@@ -224,9 +230,15 @@ public class EditNimRules extends Fragment
             valid = false;
         }
 
+        int firstPlayer = 1;
+        if(!firstPlayerRadio.isChecked())
+        {
+            firstPlayer = 2;
+        }
+
         if(valid)
         {
-            return new NimRules(pileAmts, takeOpts, opponent, firstPlayerRadio.isChecked());
+            return new NimRules(pileAmts, takeOpts, firstPlayer);
         }
         else
         {

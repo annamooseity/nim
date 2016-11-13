@@ -35,26 +35,36 @@ public class RulesCursorAdapter extends CursorAdapter
         TextView takeOptions = (TextView) view.findViewById(R.id.takeOptions_rulesList);
 
         NimRules rules = getRules(cursor.getPosition());
-        firstPlayer.setText(rules.getFirstPlayer());
+        firstPlayer.setText(String.valueOf(rules.getFirstPlayer()));
         takeOptions.setText(rules.getTakeOptions().toString());
-        numPiles.setText(rules.getPiles().length);
+        numPiles.setText(String.valueOf(rules.getPiles().length));
     }
 
     public NimRules getRules(int position)
     {
         Object o = getItem(position);
         NimRules rules;
-        try
-        {
-            rules = (NimRules) o;
+        String piles;
+        String takeOpts;
+        String firstPlayer;
+
+        if(getCursor().moveToPosition(position)) {
+            piles = getCursor().getString(getCursor().getColumnIndex(NimRules.PILES));
+            takeOpts = getCursor().getString(getCursor().getColumnIndex(NimRules.TAKE_OPTIONS));
+            firstPlayer = getCursor().getString(getCursor().getColumnIndex(NimRules.PLAYER_FIRST));
+
+            rules = new NimRules(MainActivity.stringToIntArray(piles),
+                    MainActivity.stringToIntArray(takeOpts),
+                    Integer.parseInt(firstPlayer));
+
+            return rules;
         }
-        catch (ClassCastException e)
+
+        else
         {
-            // Could not cast
-            Log.v("GameRules", "Could not cast rules.");
             return null;
         }
 
-        return rules;
+
     }
 }

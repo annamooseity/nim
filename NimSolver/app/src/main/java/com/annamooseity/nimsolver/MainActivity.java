@@ -1,5 +1,6 @@
 package com.annamooseity.nimsolver;
 
+import android.content.ContentValues;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -60,7 +61,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onNewSettings()
+    public void onNewRules()
     {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, new EditNimRules())
@@ -70,7 +71,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onNewGameWithSettings(int settingsIndex)
+    public void onNewGameWithRules(int settingsIndex)
     {
         // Start a new game with settings from database
     }
@@ -97,5 +98,33 @@ public class MainActivity extends AppCompatActivity
     public void onSaveGame(NimGame game)
     {
 
+    }
+
+    // Extra method just for making some data
+    public static ContentValues createData(String[] key, String[] data)
+    {
+        ContentValues cv = new ContentValues();
+        for (int i = 0; i < key.length; i++)
+        {
+            cv.put(key[i], data[i]);
+        }
+        return cv;
+    }
+
+    public static int[] stringToIntArray(String s)
+    {
+        String[] items = s.replaceAll("\\{", "").replaceAll("\\}", "").replaceAll("\\s", "").split(",");
+
+        int[] array = new int[items.length];
+
+        for (int i = 0; i < items.length; i++) {
+            try {
+                array[i] = Integer.parseInt(items[i]);
+            } catch (NumberFormatException nfe) {
+                //NOTE: write something here if you need to recover from formatting errors
+            };
+        }
+
+        return array;
     }
 }

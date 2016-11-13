@@ -32,14 +32,14 @@ public class RulesListFrag extends ListFragment implements LoaderManager.LoaderC
                              Bundle savedInstanceState)
     {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_new_game, container, false);
+        View view = inflater.inflate(R.layout.fragment_rules_list, container, false);
 
         view.findViewById(R.id.addRules).setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
-                mListener.onNewSettings();
+                mListener.onNewRules();
             }
         });
 
@@ -59,7 +59,7 @@ public class RulesListFrag extends ListFragment implements LoaderManager.LoaderC
     public void onListItemClick(ListView l, View v, int position, long id)
     {
         super.onListItemClick(l, v, position, id);
-        mListener.onNewGameWithSettings(position + 1);
+        mListener.onNewGameWithRules(position + 1);
     }
 
     @Override
@@ -106,8 +106,8 @@ public class RulesListFrag extends ListFragment implements LoaderManager.LoaderC
 
     public interface OnRulesListInteractionListener
     {
-        void onNewSettings();
+        void onNewRules();
 
-        void onNewGameWithSettings(int settingsIndex);
+        void onNewGameWithRules(int settingsIndex);
     }
 }
