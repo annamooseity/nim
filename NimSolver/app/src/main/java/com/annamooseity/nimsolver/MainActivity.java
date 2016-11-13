@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity
         implements StartFragment.OnStartPageButtonClickedListener,
-        NewGameFrag.OnNewGameScreenInteractionListener,
+        RulesListFrag.OnNewGameScreenInteractionListener,
         EditNimRules.OnEditRulesListener,
         PlayFragment.OnGamePlayListener
 {
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity
             // New Game
             case 0:
                 getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, new NewGameFrag())
+                    .replace(R.id.container, new RulesListFrag())
                     .addToBackStack("newTrans").commit();
                 break;
             // Load Game

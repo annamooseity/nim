@@ -13,12 +13,12 @@ import android.widget.ListView;
 // Created by Anna Carrigan
 // Oct 31, 2016
 
-public class NewGameFrag extends ListFragment
+public class RulesListFrag extends ListFragment
 {
 
     private OnNewGameScreenInteractionListener mListener;
 
-    public NewGameFrag()
+    public RulesListFrag()
     {
         // Required empty public constructor
     }
@@ -40,6 +40,15 @@ public class NewGameFrag extends ListFragment
             }
         });
 
+        ListView mListView = (ListView) view.findViewById(android.R.id.list);
+
+        // Sets up magic loaders
+        getLoaderManager().initLoader(1, null, this);
+
+        // Adds the adapter to the listView
+        RulesCursorAdapter dataAdapter = new RulesCursorAdapter(getContext(), null);
+        mListView.setAdapter(dataAdapter);
+  
         return view;
     }
 
