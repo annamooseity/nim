@@ -21,6 +21,8 @@ import android.widget.ViewSwitcher;
 
 import org.w3c.dom.Text;
 
+import java.util.Arrays;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -112,8 +114,9 @@ public class EditNimRules extends Fragment
             {
                 // Save the rules
                 NimRules rules = getRules();
-                String[] values = {rules.getPiles().toString(), rules.getTakeOptions().toString(), Integer.toString(rules.getFirstPlayer())};
+                String[] values = {Arrays.toString(rules.getPiles()), Arrays.toString(rules.getTakeOptions()), Integer.toString(rules.getFirstPlayer())};
                 ContentValues cv = MainActivity.createData(NimRules.no_id_projection, values);
+
                 getActivity().getContentResolver().insert(NimRules.CONTENT_URI_rules, cv);
                 mListener.onRulesSaved(getRules());
             }

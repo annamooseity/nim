@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
 
+import java.util.Arrays;
+
 /**
  * Created by Anna on 11/11/2016.
  */
@@ -36,7 +38,7 @@ public class RulesCursorAdapter extends CursorAdapter
 
         NimRules rules = getRules(cursor.getPosition());
         firstPlayer.setText(String.valueOf(rules.getFirstPlayer()));
-        takeOptions.setText(rules.getTakeOptions().toString());
+        takeOptions.setText(Arrays.toString(rules.getTakeOptions()));
         numPiles.setText(String.valueOf(rules.getPiles().length));
     }
 

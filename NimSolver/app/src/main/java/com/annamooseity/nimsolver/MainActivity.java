@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity
 
     public static int[] stringToIntArray(String s)
     {
-        String[] items = s.replaceAll("\\{", "").replaceAll("\\}", "").replaceAll("\\s", "").split(",");
+        String[] items = s.replaceAll("\\[", "").replaceAll("\\]", "").replaceAll("\\s", "").split(",");
 
         int[] array = new int[items.length];
 
