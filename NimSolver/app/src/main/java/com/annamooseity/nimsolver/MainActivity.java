@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity
         implements StartFragment.OnStartPageButtonClickedListener,
-        RulesListFrag.OnNewGameScreenInteractionListener,
+        RulesListFrag.OnRulesListInteractionListener,
         EditNimRules.OnEditRulesListener,
         PlayFragment.OnGamePlayListener
 {

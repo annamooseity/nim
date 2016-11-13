@@ -1,10 +1,12 @@
 package com.annamooseity.nimsolver;
 
 import android.content.Context;
-import android.net.Uri;
+import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +15,11 @@ import android.widget.ListView;
 // Created by Anna Carrigan
 // Oct 31, 2016
 
-public class RulesListFrag extends ListFragment
+public class RulesListFrag extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor>
 {
 
-    private OnNewGameScreenInteractionListener mListener;
+    private OnRulesListInteractionListener mListener;
+    private RulesCursorAdapter dataAdapter;
 
     public RulesListFrag()
     {
@@ -46,9 +49,9 @@ public class RulesListFrag extends ListFragment
         getLoaderManager().initLoader(1, null, this);
 
         // Adds the adapter to the listView
-        RulesCursorAdapter dataAdapter = new RulesCursorAdapter(getContext(), null);
+       dataAdapter = new RulesCursorAdapter(getContext(), null);
         mListView.setAdapter(dataAdapter);
-  
+
         return view;
     }
 
@@ -63,14 +66,14 @@ public class RulesListFrag extends ListFragment
     public void onAttach(Context context)
     {
         super.onAttach(context);
-        if (context instanceof OnNewGameScreenInteractionListener)
+        if (context instanceof OnRulesListInteractionListener)
         {
-            mListener = (OnNewGameScreenInteractionListener) context;
+            mListener = (OnRulesListInteractionListener) context;
         }
         else
         {
             throw new RuntimeException(context.toString()
-                    + " must implement OnNewGameScreenInteractionListener");
+                    + " must implement OnRulesListInteractionListener");
         }
     }
 
@@ -81,7 +84,27 @@ public class RulesListFrag extends ListFragment
         mListener = null;
     }
 
-    public interface OnNewGameScreenInteractionListener
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args)
+    {
+        CursorLoader cursorLoader = new CursorLoader(getActivity(),
+                NimRules.CONTENT_URI_rules, NimRules.projection, null, null, null);
+        return cursorLoader;
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data)
+    {
+        dataAdapter.swapCursor(data);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader)
+    {
+        dataAdapter.swapCursor(null);
+    }
+
+    public interface OnRulesListInteractionListener
     {
         void onNewSettings();
 
