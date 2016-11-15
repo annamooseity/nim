@@ -1,9 +1,16 @@
 package com.annamooseity.nimsolver;
 
 import android.content.ContentValues;
+import android.content.DialogInterface;
+import android.database.Cursor;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.Switch;
+import android.widget.ViewSwitcher;
 
 public class MainActivity extends AppCompatActivity
         implements StartFragment.OnStartPageButtonClickedListener,
@@ -26,13 +33,13 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onButtonClicked(int i)
     {
-        switch(i)
+        switch (i)
         {
             // New Game
             case 0:
                 getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, new RulesListFrag())
-                    .addToBackStack("newTrans").commit();
+                        .replace(R.id.container, new RulesListFrag())
+                        .addToBackStack("newTrans").commit();
                 break;
             // Load Game
             case 1:
@@ -71,15 +78,54 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onNewGameWithRules(int settingsIndex)
+    public void onNewGameWithRules(int position, final NimRules rules)
     {
+
         // Start a new game with settings from database
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View dialogView = View.inflate(this, R.layout.new_game_dialog, null);
+        final Switch dialogSwitch = (Switch) dialogView.findViewById(R.id.aiSwitch);
+        final ViewSwitcher playAISwitcher = (ViewSwitcher) dialogView.findViewById(R.id.playerNameSwitcher);
+        final EditText otherPlayer = (EditText) dialogView.findViewById(R.id.otherPlayerName_dialog);
+        dialogSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b)
+            {
+                playAISwitcher.showNext();
+            }
+        });
+        builder.setTitle("Start a New Game");
+        builder.setView(dialogView);
+        builder.setPositiveButton("Let's go!", new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i)
+            {
+                String otherPlayerName = "";
+                if(!dialogSwitch.isChecked())
+                {
+                    otherPlayerName = otherPlayer.getText().toString();
+                }
+                playGame(new NimGame(rules, rules.getPiles(), 0, otherPlayerName));
+                        // Save new game
+            }
+        });
+        builder.setNegativeButton("Cancel", null);
+
+        builder.show();
+    }
+
+    public void playGame(NimGame game)
+    {
+        // play the game
     }
 
     @Override
     public void onRulesSaved(NimRules rules)
     {
-     // Save the rules to the content provider
+        // Save the rules to the content provider
     }
 
     @Override
@@ -117,12 +163,16 @@ public class MainActivity extends AppCompatActivity
 
         int[] array = new int[items.length];
 
-        for (int i = 0; i < items.length; i++) {
-            try {
+        for (int i = 0; i < items.length; i++)
+        {
+            try
+            {
                 array[i] = Integer.parseInt(items[i]);
-            } catch (NumberFormatException nfe) {
+            } catch (NumberFormatException nfe)
+            {
                 //NOTE: write something here if you need to recover from formatting errors
-            };
+            }
+            ;
         }
 
         return array;

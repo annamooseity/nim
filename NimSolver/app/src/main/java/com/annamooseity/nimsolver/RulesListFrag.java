@@ -59,7 +59,9 @@ public class RulesListFrag extends ListFragment implements LoaderManager.LoaderC
     public void onListItemClick(ListView l, View v, int position, long id)
     {
         super.onListItemClick(l, v, position, id);
-        mListener.onNewGameWithRules(position + 1);
+
+
+        mListener.onNewGameWithRules(position + 1, dataAdapter.getRules(position));
     }
 
     @Override
@@ -108,6 +110,6 @@ public class RulesListFrag extends ListFragment implements LoaderManager.LoaderC
     {
         void onNewRules();
 
-        void onNewGameWithRules(int settingsIndex);
+        void onNewGameWithRules(int settingsIndex, NimRules nimRules);
     }
 }
