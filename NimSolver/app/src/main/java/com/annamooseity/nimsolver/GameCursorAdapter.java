@@ -3,15 +3,18 @@ package com.annamooseity.nimsolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v4.widget.CursorAdapter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 /**
- * Created by Anna on 11/11/2016.
+ * GameCursorAdapter.java
+ * Anna Carrigan
+ *
+ * Adapter for the list of games to make things pretty and nice
  */
+
 public class GameCursorAdapter extends CursorAdapter
 {
     public GameCursorAdapter(Context context, Cursor cursor)
@@ -36,13 +39,20 @@ public class GameCursorAdapter extends CursorAdapter
         TextView moves = (TextView) view.findViewById(R.id.moves_gameList);
 
         NimGame game = getGameWithoutRules(cursor.getPosition());
-        moves.setText(game.getMove());
-        lastPlayedOn.setText(game.getLastPlayedOn());
-        numPiles.setText(game.getPiles().length);
-        opponent.setText(game.getOtherPlayerName());
+        if(game != null) {
+            moves.setText(game.getMove());
+            lastPlayedOn.setText(game.getLastPlayedOn());
+            numPiles.setText(game.getPiles().length);
+            opponent.setText(game.getOtherPlayerName());
+        }
     }
 
-    public NimGame getGameWithoutRules(int position)
+    /**
+     * Gets an actual game from the listview
+     * @param position The index position in the list of the objects
+     * @return NimGame the game object for that list item -- SANS RULES!
+     */
+    private NimGame getGameWithoutRules(int position)
     {
         NimGame game;
         String move;
