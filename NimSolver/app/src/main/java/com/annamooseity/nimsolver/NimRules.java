@@ -2,13 +2,16 @@ package com.annamooseity.nimsolver;
 
 import android.net.Uri;
 
+
 /**
- * Created by Anna on 10/31/2016.
+ * NimRules.java
+ * Anna Carrigan
+ * Object class for rules of nim
  */
 
-// Container class for rules of nim
 public class NimRules
 {
+    // Statics for our content provider to use later
     public static String TAKE_OPTIONS = "takeOpts";
     public static String PILES = "piles";
     public static String PLAYER_FIRST = "firstPlayer";
@@ -17,6 +20,8 @@ public class NimRules
     public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.annamooseity.rules";
     public static String[] projection = new String[]{RULES_ID, PILES, TAKE_OPTIONS, PLAYER_FIRST};
     public static String[] no_id_projection = new String[]{PILES, TAKE_OPTIONS, PLAYER_FIRST};
+
+    // Actual rule paramters
     private int[] piles;
     private int[] takeOptions;
 

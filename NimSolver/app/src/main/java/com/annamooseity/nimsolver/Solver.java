@@ -3,9 +3,10 @@ package com.annamooseity.nimsolver;
 import android.util.Pair;
 
 /**
- * Created by Anna on 11/16/2016.
+ * Solver.java
+ * Anna Carrigan
+ * Solver to find who is going to win the nim game and how
  */
-
 // TODO make this optimized by storing info on the game perhaps????
 public class Solver
 {
@@ -30,9 +31,11 @@ public class Solver
         takeOptions = game.getRules().getTakeOptions();
 
         numPiles = piles.length;
+
+        populateArray();
     }
 
-    public void populateArray()
+    private void populateArray()
     {
         boolean found = false;
 

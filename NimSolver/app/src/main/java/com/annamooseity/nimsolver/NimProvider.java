@@ -13,13 +13,17 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 
 
 /**
- * Created by Anna on 11/7/2016.
+ * NimProvider.java
+ * Anna Carrigan
+ * Content Provider for our Nim game
  */
 public class NimProvider extends ContentProvider
 {
+    // Database name and the big info
     private static final String DATABASE_NAME = "nimProvider.db";
     private static final int DATABASE_VERSION = 1;
     public static final String PROVIDER = "com.annamooseity.nim";
@@ -79,7 +83,7 @@ public class NimProvider extends ContentProvider
     }
 
     @Override
-    public int delete(Uri uri, String where, String[] whereArgs)
+    public int delete(@NonNull Uri uri, String where, String[] whereArgs)
     {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         int count;
@@ -108,12 +112,14 @@ public class NimProvider extends ContentProvider
                 throw new IllegalArgumentException("Unknown URI " + uri);
         }
 
-        getContext().getContentResolver().notifyChange(notifyUri, null);
+        if(getContext() != null) {
+            getContext().getContentResolver().notifyChange(notifyUri, null);
+        }
         return count;
     }
 
     @Override
-    public String getType(Uri uri)
+    public String getType(@NonNull Uri uri) throws IllegalArgumentException
     {
         switch (sUriMatcher.match(uri))
         {
@@ -131,7 +137,7 @@ public class NimProvider extends ContentProvider
     }
 
     @Override
-    public Uri insert(Uri uri, ContentValues initialValues)
+    public Uri insert(@NonNull Uri uri, ContentValues initialValues)
     {
 
         ContentValues values;
@@ -155,7 +161,9 @@ public class NimProvider extends ContentProvider
                 if (rowId > 0)
                 {
                     Uri gameUri = ContentUris.withAppendedId(NimGame.CONTENT_URI_game, rowId);
-                    getContext().getContentResolver().notifyChange(gameUri, null);
+                    if(getContext() != null) {
+                        getContext().getContentResolver().notifyChange(gameUri, null);
+                    }
                     return gameUri;
                 }
                 break;
@@ -165,7 +173,9 @@ public class NimProvider extends ContentProvider
                 if (rowId > 0)
                 {
                     Uri rulesUri = ContentUris.withAppendedId(NimRules.CONTENT_URI_rules, rowId);
-                    getContext().getContentResolver().notifyChange(rulesUri, null);
+                    if(getContext() != null) {
+                        getContext().getContentResolver().notifyChange(rulesUri, null);
+                    }
                     return rulesUri;
                 }
                 break;
@@ -184,7 +194,7 @@ public class NimProvider extends ContentProvider
     }
 
     @Override
-    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder)
+    public Cursor query(@NonNull Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder)
     {
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
         Uri notifyUri;
@@ -226,13 +236,15 @@ public class NimProvider extends ContentProvider
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor c = qb.query(db, projection, selection, selectionArgs, null, null, sortOrder);
 
-        c.setNotificationUri(getContext().getContentResolver(), notifyUri);
+        if(getContext() != null) {
+            c.setNotificationUri(getContext().getContentResolver(), notifyUri);
+        }
 
         return c;
     }
 
     @Override
-    public int update(Uri uri, ContentValues values, String where, String[] whereArgs)
+    public int update(@NonNull Uri uri, ContentValues values, String where, String[] whereArgs)
     {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         int count;
@@ -251,10 +263,15 @@ public class NimProvider extends ContentProvider
                 throw new IllegalArgumentException("Unknown URI " + uri);
         }
 
-        getContext().getContentResolver().notifyChange(notifyUri, null);
+        if(getContext() != null) {
+            getContext().getContentResolver().notifyChange(notifyUri, null);
+        }
         return count;
     }
 
+    /**
+     * Add the projection maps for the database
+     */
     static
     {
         sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
@@ -263,14 +280,14 @@ public class NimProvider extends ContentProvider
         sUriMatcher.addURI(PROVIDER, RULES_TABLE_NAME, RULES);
         sUriMatcher.addURI(PROVIDER, RULES_TABLE_NAME + "/#", RULES_ID);
 
-        gameProjectionMap = new HashMap<String, String>();
+        gameProjectionMap = new HashMap<>();
         gameProjectionMap.put(NimGame.GAME_ID, NimGame.GAME_ID);
         gameProjectionMap.put(NimGame.PILES, NimGame.PILES);
         gameProjectionMap.put(NimGame.RULES_INDEX, NimGame.RULES_INDEX);
         gameProjectionMap.put(NimGame.MOVE, NimGame.MOVE);
         gameProjectionMap.put(NimGame.OPPONENT, NimGame.OPPONENT);
 
-         rulesProjectionMap = new HashMap<String, String>();
+         rulesProjectionMap = new HashMap<>();
          rulesProjectionMap.put(NimRules.RULES_ID, NimRules.RULES_ID);
          rulesProjectionMap.put(NimRules.PILES, NimRules.PILES);
          rulesProjectionMap.put(NimRules.PLAYER_FIRST, NimRules.PLAYER_FIRST);

@@ -13,20 +13,21 @@ import android.view.ViewGroup;
 
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link PlayFragment.OnGamePlayListener} interface
- * to handle interaction events.
+ * PlayFragment.java
+ * Anna Carrigan
+ * Fragment to hold the gameplay view
  */
 public class PlayFragment extends Fragment
 {
-    private NimGame game;
-    private OnGamePlayListener mListener;
-    private GameView gameView;
-
+    // Strings for the menu
     private static String saveStr = "Save Game";
     private static String helpStr = "Help!";
     private static String restartStr = "Restart";
+
+    // Parameters for gameplay
+    private NimGame game;
+    private OnGamePlayListener mListener;
+    private GameView gameView;
 
     public PlayFragment()
     {
@@ -44,6 +45,11 @@ public class PlayFragment extends Fragment
         return inflater.inflate(R.layout.fragment_play, container, false);
     }
 
+    /**
+     * Creates custom options menu
+     * @param menu
+     * @param inflater
+     */
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
     {
@@ -52,6 +58,11 @@ public class PlayFragment extends Fragment
         MenuItem restart = menu.add(restartStr);
     }
 
+    /**
+     * Handles behavior of our custom menu
+     * @param item item selected from options
+     * @return whether or not the item was in the main dropdown
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -59,7 +70,7 @@ public class PlayFragment extends Fragment
 
         if(title.equals(saveStr))
         {
-            mListener.onSaveGame(game);
+            mListener.onSaveGame();
             return false;
         }
         else if(title.equals(helpStr))
@@ -78,6 +89,9 @@ public class PlayFragment extends Fragment
         }
     }
 
+    /**
+     * Restarts the game
+     */
     private void restart()
     {
 
@@ -108,7 +122,7 @@ public class PlayFragment extends Fragment
 
     public interface OnGamePlayListener
     {
-        void onGameOver(NimGame game);
-        void onSaveGame(NimGame game);
+        void onGameOver();
+        void onSaveGame();
     }
 }

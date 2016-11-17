@@ -11,7 +11,10 @@ import android.util.AttributeSet;
 import android.view.View;
 
 /**
- * TODO: document your custom view class.
+ * GameView.java
+ * Anna Carrigan
+ *
+ * Displays a gui version for our Nim Game
  */
 public class GameView extends View
 {

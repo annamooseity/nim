@@ -1,27 +1,36 @@
+
+
 package com.annamooseity.nimsolver;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-// Created by Anna Carrigan
-// Oct 31, 2016
-
+/**
+ * StartFragment.java
+ *
+ * Anna Carrigan
+ *
+ *
+ *
+ * The start page for the nim application.
+ *
+ * New Game - Start a new game from the provided rules (or create new rules)
+ * Load Game - Continue a game you were playing earlier that is saved
+ * How To Play - A quick overview of what the game of Nim is all about
+ */
 
 public class StartFragment extends Fragment
 {
-
     private OnStartPageButtonClickedListener mListener;
 
     public StartFragment()
     {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

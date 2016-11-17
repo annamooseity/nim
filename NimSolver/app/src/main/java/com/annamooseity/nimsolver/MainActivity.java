@@ -6,12 +6,20 @@ import android.database.Cursor;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
+
+/**
+ * MainActivity.java
+ * Anna Carrigan
+ *
+ * Control for our NimGame
+ */
 
 public class MainActivity extends AppCompatActivity
         implements StartFragment.OnStartPageButtonClickedListener,
@@ -68,16 +76,23 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * Displays screen to create new set of rules and allows back button
+     */
     @Override
     public void onNewRules()
     {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, new EditNimRules())
                 .addToBackStack("editNimRules").commit();
-
-        // Show new settings screen
     }
 
+    /**
+     * Loads a new game with the specified rules
+     *
+     * @param position index of the rules in the database
+     * @param rules actual rules object
+     */
     @Override
     public void onNewGameWithRules(final int position, final NimRules rules)
     {
@@ -118,36 +133,59 @@ public class MainActivity extends AppCompatActivity
         builder.show();
     }
 
+    /**
+     * Play the game
+     *
+     * @param game the game to play
+     */
     public void playGame(NimGame game)
     {
         // play the game
     }
 
+    /**
+     * Determine behavior after rules are saved
+     */
     @Override
-    public void onRulesSaved(NimRules rules)
+    public void onRulesSaved()
     {
-        // Save the rules to the content provider
+        // Go back to main screen if necessary
     }
 
+    /**
+     * Go back to the screen before
+     */
     @Override
     public void onCancel()
     {
         super.onBackPressed();
     }
 
+    /**
+     * Game is over
+     */
     @Override
-    public void onGameOver(NimGame game)
+    public void onGameOver()
     {
 
     }
 
+    /**
+     * Save Game
+     */
     @Override
-    public void onSaveGame(NimGame game)
+    public void onSaveGame()
     {
 
     }
 
-    // Extra method just for making some data
+    /**
+     * Creates content values from a string array for a database
+     * Stolen from my teacher, Jim Ward, at University of Wyoming
+     * @param key the name of the database column
+     * @param data the actual string data we want to go in the table
+     * @return ContentValues ready to insert into the database
+     */
     public static ContentValues createData(String[] key, String[] data)
     {
         ContentValues cv = new ContentValues();
@@ -158,9 +196,14 @@ public class MainActivity extends AppCompatActivity
         return cv;
     }
 
-    public static int[] stringToIntArray(String s)
+    /**
+     * Converts a string of numbers to an array of integers
+     * @param string
+     * @return an integer array
+     */
+    public static int[] stringToIntArray(String string)
     {
-        String[] items = s.replaceAll("\\[", "").replaceAll("\\]", "").replaceAll("\\s", "").split(",");
+        String[] items = string.replaceAll("\\[", "").replaceAll("\\]", "").replaceAll("\\s", "").split(",");
 
         int[] array = new int[items.length];
 
@@ -171,11 +214,10 @@ public class MainActivity extends AppCompatActivity
                 array[i] = Integer.parseInt(items[i]);
             } catch (NumberFormatException nfe)
             {
-                //NOTE: write something here if you need to recover from formatting errors
+                Log.e("Error", "Oops! Your string did not format nicely into integers.");
             }
-            ;
-        }
 
+        }
         return array;
     }
 

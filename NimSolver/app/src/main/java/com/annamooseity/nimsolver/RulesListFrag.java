@@ -12,12 +12,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-// Created by Anna Carrigan
-// Oct 31, 2016
+
+/**
+ * RulesListFrag.java
+ * Anna Carrigan
+ * ListView for the list of rules already saved
+ */
 
 public class RulesListFrag extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor>
 {
-
     private OnRulesListInteractionListener mListener;
     private RulesCursorAdapter dataAdapter;
 
@@ -55,11 +58,17 @@ public class RulesListFrag extends ListFragment implements LoaderManager.LoaderC
         return view;
     }
 
+    /**
+     * When a list item is clicked, start a new game with it
+     * @param l the listview
+     * @param v view
+     * @param position the position of the click
+     * @param id the id of the click
+     */
     @Override
     public void onListItemClick(ListView l, View v, int position, long id)
     {
         super.onListItemClick(l, v, position, id);
-
 
         mListener.onNewGameWithRules(position + 1, dataAdapter.getRules(position));
     }

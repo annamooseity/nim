@@ -12,7 +12,9 @@ import android.widget.TextView;
 import java.util.Arrays;
 
 /**
- * Created by Anna on 11/11/2016.
+ * RulesCursorAdapter.java
+ * Anna Carrigan
+ * Adapter to make the list of rules pretty and nice
  */
 public class RulesCursorAdapter extends CursorAdapter
 {
@@ -42,9 +44,13 @@ public class RulesCursorAdapter extends CursorAdapter
         numPiles.setText(String.valueOf(rules.getPiles().length));
     }
 
+    /**
+     * Returns an actual rules object
+     * @param position of the rules in the listview
+     * @return rules object
+     */
     public NimRules getRules(int position)
     {
-        Object o = getItem(position);
         NimRules rules;
         String piles;
         String takeOpts;
