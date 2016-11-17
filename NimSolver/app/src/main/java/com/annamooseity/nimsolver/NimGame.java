@@ -18,6 +18,10 @@ public class NimGame
     public static final Uri CONTENT_URI_game = Uri.parse("content://"+ NimProvider.PROVIDER+"/games/1");
     public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.annamooseity.game";
 
+
+
+    private int rulesIndex;
+
     private int lastPlayedOn;
 
     public NimRules getRules()
@@ -45,18 +49,29 @@ public class NimGame
         return otherPlayerName;
     }
 
+    public int getRulesIndex()
+    {
+        return rulesIndex;
+    }
+
+    public void setRulesIndex(int rulesIndex)
+    {
+        this.rulesIndex = rulesIndex;
+    }
+
     private NimRules rules;
     private int[] piles;
     private int move;
     public boolean isOver = false;
     private String otherPlayerName = "";
 
-    public NimGame(NimRules rules, int[] piles, int move, String otherPlayerName)
+    public NimGame(NimRules rules, int[] piles, int move, String otherPlayerName, int rulesIndex)
     {
         this.rules = rules;
         this.piles = piles;
         this.move = move;
         this.otherPlayerName = otherPlayerName;
+        this.rulesIndex = rulesIndex;
         lastPlayedOn = 0;
     }
 

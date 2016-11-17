@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
 public class MainActivity extends AppCompatActivity
@@ -78,7 +79,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onNewGameWithRules(int position, final NimRules rules)
+    public void onNewGameWithRules(final int position, final NimRules rules)
     {
 
         // Start a new game with settings from database
@@ -108,7 +109,7 @@ public class MainActivity extends AppCompatActivity
                 {
                     otherPlayerName = otherPlayer.getText().toString();
                 }
-                playGame(new NimGame(rules, rules.getPiles(), 0, otherPlayerName));
+                playGame(new NimGame(rules, rules.getPiles(), 0, otherPlayerName, position + 1));
                         // Save new game
             }
         });
@@ -177,4 +178,5 @@ public class MainActivity extends AppCompatActivity
 
         return array;
     }
+
 }

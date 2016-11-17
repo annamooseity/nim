@@ -35,29 +35,38 @@ public class GameCursorAdapter extends CursorAdapter
         TextView lastPlayedOn = (TextView) view.findViewById(R.id.lastPlayedOn_gameList);
         TextView moves = (TextView) view.findViewById(R.id.moves_gameList);
 
-        NimGame game = getGame(cursor.getPosition());
+        NimGame game = getGameWithoutRules(cursor.getPosition());
         moves.setText(game.getMove());
         lastPlayedOn.setText(game.getLastPlayedOn());
-        numPiles.setText(game.getRules().getPiles().length);
+        numPiles.setText(game.getPiles().length);
         opponent.setText(game.getOtherPlayerName());
     }
 
-    public NimGame getGame(int position)
+    public NimGame getGameWithoutRules(int position)
     {
-        Object o = getItem(position);
         NimGame game;
-        try
+        String move;
+        String nimRulesIndex;
+        String otherPlayerName;
+        String piles;
+
+        if(getCursor().moveToPosition(position))
         {
-            game = (NimGame) o;
+            move = getCursor().getString(getCursor().getColumnIndex(NimGame.MOVE));
+            otherPlayerName = getCursor().getString(getCursor().getColumnIndex(NimGame.OPPONENT));
+            nimRulesIndex = getCursor().getString(getCursor().getColumnIndex(NimGame.RULES_INDEX));
+            piles = getCursor().getString(getCursor().getColumnIndex(NimGame.PILES));
+
+            game = new NimGame(new NimRules(null, null, 1),
+                    MainActivity.stringToIntArray(piles), Integer.parseInt(move), otherPlayerName, Integer.parseInt(nimRulesIndex));
+
+            return game;
         }
-        catch (ClassCastException e)
+        else
         {
-            // Could not cast
-            Log.v("GameCursor", "Could not cast game.");
             return null;
         }
 
-        return game;
     }
 
 
