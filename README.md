@@ -1,5 +1,7 @@
 # Nim Solver
+
 Anna Carrigan
+
 Senior Project for University of Wyoming Honors Program
 
 This is an application that allows the user to win at the game of Nim! (Haven't heard of it? Wikipedia has: https://en.wikipedia.org/wiki/Nim)
