@@ -40,9 +40,9 @@ public class GameCursorAdapter extends CursorAdapter
 
         NimGame game = getGameWithoutRules(cursor.getPosition());
         if(game != null) {
-            moves.setText(game.getMove());
-            lastPlayedOn.setText(game.getLastPlayedOn());
-            numPiles.setText(game.getPiles().length);
+            moves.setText(Integer.toString(game.getMove()));
+            //lastPlayedOn.setText(game.getLastPlayedOn());
+            numPiles.setText(Integer.toString(game.getPiles().length));
             opponent.setText(game.getOtherPlayerName());
         }
     }
@@ -52,7 +52,7 @@ public class GameCursorAdapter extends CursorAdapter
      * @param position The index position in the list of the objects
      * @return NimGame the game object for that list item -- SANS RULES!
      */
-    private NimGame getGameWithoutRules(int position)
+    public NimGame getGameWithoutRules(int position)
     {
         NimGame game;
         String move;

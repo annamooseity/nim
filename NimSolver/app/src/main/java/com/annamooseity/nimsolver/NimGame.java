@@ -19,6 +19,8 @@ public class NimGame
     public static String OPPONENT = "opponent";
     public static final Uri CONTENT_URI_game = Uri.parse("content://"+ NimProvider.PROVIDER+"/games/1");
     public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.annamooseity.game";
+    public static String[] projection = new String[]{GAME_ID, PILES, RULES_INDEX, OPPONENT, MOVE};
+    public static String[] no_id_projection = new String[] {PILES, RULES_INDEX, OPPONENT, MOVE};
 
     // Actual game parameters
     private int rulesIndex;

@@ -3,6 +3,7 @@ package com.annamooseity.nimsolver;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.database.Cursor;
+import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +14,8 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
+
+import java.util.Arrays;
 
 /**
  * MainActivity.java
@@ -25,12 +28,14 @@ public class MainActivity extends AppCompatActivity
         implements StartFragment.OnStartPageButtonClickedListener,
         RulesListFrag.OnRulesListInteractionListener,
         EditNimRules.OnEditRulesListener,
-        PlayFragment.OnGamePlayListener
+        PlayFragment.OnGamePlayListener,
+        GameListFrag.OnGameListInteractionListener
 {
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -52,7 +57,9 @@ public class MainActivity extends AppCompatActivity
                 break;
             // Load Game
             case 1:
-
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container, new GameListFrag())
+                        .addToBackStack("newTrans").commit();
                 break;
 
             // How-To
@@ -221,4 +228,9 @@ public class MainActivity extends AppCompatActivity
         return array;
     }
 
+    @Override
+    public void onGameClicked(NimGame game)
+    {
+        // start the loaded game
+    }
 }
