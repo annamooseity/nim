@@ -91,21 +91,13 @@ public class NimProvider extends ContentProvider
         switch (sUriMatcher.match(uri))
         {
             case GAME:
-                notifyUri = NimGame.CONTENT_URI_game;
-                count = db.delete(GAME_TABLE_NAME, where, whereArgs);
-                break;
             case GAME_ID:
                 notifyUri = NimGame.CONTENT_URI_game;
-                where = where + "_id = " + uri.getLastPathSegment();
                 count = db.delete(GAME_TABLE_NAME, where, whereArgs);
                 break;
+            case RULES_ID:
             case RULES:
                 notifyUri = NimRules.CONTENT_URI_rules;
-                count = db.delete(RULES_TABLE_NAME, where, whereArgs);
-                break;
-            case RULES_ID:
-                notifyUri = NimRules.CONTENT_URI_rules;
-                where = where + "_id = " + uri.getLastPathSegment();
                 count = db.delete(RULES_TABLE_NAME, where, whereArgs);
                 break;
             default:

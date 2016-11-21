@@ -1,17 +1,18 @@
 package com.annamooseity.nimsolver;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.util.Log;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 
@@ -48,7 +49,31 @@ public class GameListFrag extends ListFragment implements LoaderManager.LoaderCa
         dataAdapter = new GameCursorAdapter(getContext(), null);
         mListView.setAdapter(dataAdapter);
 
+        mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
+        {
+            @Override
+            public boolean onItemLongClick(AdapterView adapterView, View view, int i, long l)
+            {
 
+                final int index = i + 1;
+                AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+
+                dialog.setMessage("Delete your game with " + dataAdapter.getGameWithoutRules(i).getOtherPlayerName() + "?");
+                dialog.setPositiveButton("Delete", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i)
+                    {
+                        String[] args = {Integer.toString(index)};
+                        getActivity().getContentResolver().delete(NimGame.CONTENT_URI_game, NimGame.GAME_ID + "=?", args);
+                    }
+                });
+
+                dialog.setNegativeButton("Cancel", null);
+                dialog.show();
+                return true;
+            }
+        });
 
         return view;
     }
@@ -66,8 +91,26 @@ public class GameListFrag extends ListFragment implements LoaderManager.LoaderCa
     {
         super.onListItemClick(l, v, position, id);
 
-        mListener.onGameClicked(dataAdapter.getGameWithoutRules(position));
+        final int index = position;
+
+        AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+
+        dialog.setMessage("Load your game with " + dataAdapter.getGameWithoutRules(position).getOtherPlayerName() + "?");
+        dialog.setPositiveButton("Load", new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i)
+            {
+                mListener.onLoadGame(dataAdapter.getGameWithoutRules(index));
+
+            }
+        });
+
+        dialog.setNegativeButton("Cancel", null);
+        dialog.show();
+
     }
+
 
 
     @Override
@@ -117,6 +160,6 @@ public class GameListFrag extends ListFragment implements LoaderManager.LoaderCa
      */
     public interface OnGameListInteractionListener
     {
-        void onGameClicked(NimGame game);
+        void onLoadGame(NimGame game);
     }
 }

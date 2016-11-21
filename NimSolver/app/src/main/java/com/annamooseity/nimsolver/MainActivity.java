@@ -229,8 +229,9 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onGameClicked(NimGame game)
+    public void onLoadGame(NimGame game)
     {
-        // start the loaded game
+        // Start a new game with settings from database
+
     }
 }
