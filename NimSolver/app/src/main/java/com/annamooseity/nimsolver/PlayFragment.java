@@ -1,5 +1,6 @@
 package com.annamooseity.nimsolver;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.LinearLayout;
+
+import java.util.Arrays;
 
 
 /**
@@ -71,7 +74,7 @@ public class PlayFragment extends Fragment
         NimPileView pile4 = (NimPileView) view.findViewById(R.id.pile4);
         NimPileView pile5 = (NimPileView) view.findViewById(R.id.pile5);
         NimPileView pile6 = (NimPileView) view.findViewById(R.id.pile6);
-        
+
         LinearLayout.LayoutParams all = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 3);
         LinearLayout.LayoutParams half = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1.5f);
 
@@ -143,7 +146,7 @@ public class PlayFragment extends Fragment
 
         if(title.equals(saveStr))
         {
-            mListener.onSaveGame();
+            saveGame(game);
             return false;
         }
         else if(title.equals(helpStr))
@@ -168,6 +171,13 @@ public class PlayFragment extends Fragment
     private void restart()
     {
 
+    }
+
+    public void saveGame(NimGame game)
+    {
+        // Check if already saved (should be saved at very beginning)
+
+        // Update the current entry
     }
 
     @Override
@@ -196,6 +206,5 @@ public class PlayFragment extends Fragment
     public interface OnGamePlayListener
     {
         void onGameOver();
-        void onSaveGame();
     }
 }
