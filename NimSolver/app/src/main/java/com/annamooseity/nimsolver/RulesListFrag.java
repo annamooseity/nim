@@ -1,16 +1,21 @@
 package com.annamooseity.nimsolver;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+
+import java.util.Arrays;
 
 
 /**
@@ -54,6 +59,32 @@ public class RulesListFrag extends ListFragment implements LoaderManager.LoaderC
         // Adds the adapter to the listView
        dataAdapter = new RulesCursorAdapter(getContext(), null);
         mListView.setAdapter(dataAdapter);
+
+        mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
+        {
+            @Override
+            public boolean onItemLongClick(AdapterView adapterView, View view, int i, long l)
+            {
+
+                final int index = i + 1;
+                AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+
+                dialog.setMessage("Delete your rules with piles " + Arrays.toString(dataAdapter.getRules(i).getPiles()) + "?");
+                dialog.setPositiveButton("Delete", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i)
+                    {
+                        String[] args = {Integer.toString(index)};
+                        getActivity().getContentResolver().delete(NimRules.CONTENT_URI_rules, NimRules.RULES_ID + "=?", args);
+                    }
+                });
+
+                dialog.setNegativeButton("Cancel", null);
+                dialog.show();
+                return true;
+            }
+        });
 
         return view;
     }
