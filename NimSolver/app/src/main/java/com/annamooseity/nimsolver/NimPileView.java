@@ -11,12 +11,12 @@ import android.util.AttributeSet;
 import android.view.View;
 
 /**
- * GameView.java
+ * NimPileView.java
  * Anna Carrigan
  *
  * Displays a gui version for our Nim Game
  */
-public class GameView extends View
+public class NimPileView extends View
 {
     private String mExampleString; // TODO: use a default from R.string...
     private int mExampleColor = Color.RED; // TODO: use a default from R.color...
@@ -27,19 +27,19 @@ public class GameView extends View
     private float mTextWidth;
     private float mTextHeight;
 
-    public GameView(Context context)
+    public NimPileView(Context context)
     {
         super(context);
         init(null, 0);
     }
 
-    public GameView(Context context, AttributeSet attrs)
+    public NimPileView(Context context, AttributeSet attrs)
     {
         super(context, attrs);
         init(attrs, 0);
     }
 
-    public GameView(Context context, AttributeSet attrs, int defStyle)
+    public NimPileView(Context context, AttributeSet attrs, int defStyle)
     {
         super(context, attrs, defStyle);
         init(attrs, defStyle);
@@ -49,23 +49,23 @@ public class GameView extends View
     {
         // Load attributes
         final TypedArray a = getContext().obtainStyledAttributes(
-                attrs, R.styleable.GameView, defStyle, 0);
+                attrs, R.styleable.NimPileView, defStyle, 0);
 
         mExampleString = a.getString(
-                R.styleable.GameView_exampleString);
+                R.styleable.NimPileView_exampleString);
         mExampleColor = a.getColor(
-                R.styleable.GameView_exampleColor,
+                R.styleable.NimPileView_exampleColor,
                 mExampleColor);
         // Use getDimensionPixelSize or getDimensionPixelOffset when dealing with
         // values that should fall on pixel boundaries.
         mExampleDimension = a.getDimension(
-                R.styleable.GameView_exampleDimension,
+                R.styleable.NimPileView_exampleDimension,
                 mExampleDimension);
 
-        if (a.hasValue(R.styleable.GameView_exampleDrawable))
+        if (a.hasValue(R.styleable.NimPileView_exampleDrawable))
         {
             mExampleDrawable = a.getDrawable(
-                    R.styleable.GameView_exampleDrawable);
+                    R.styleable.NimPileView_exampleDrawable);
             mExampleDrawable.setCallback(this);
         }
 

@@ -1,47 +1,93 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context="com.annamooseity.nimsolver.PlayFragment">
+                android:orientation="vertical"
+             tools:context="com.annamooseity.nimsolver.PlayFragment"
+                android:weightSum="2">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/turnDisplay"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="10dp"
         android:textSize="30dp"
         android:text="Player Whoever's Turn"/>
-    
-    <com.annamooseity.nimsolver.GameView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/turnDisplay"
-        android:layout_above="@+id/outcomeInfo"
-        android:id="@+id/gameView"/>
 
-
-
-    
-    <Spinner
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="30dp"
-        android:textSize="20dp"
-        android:layout_alignParentBottom="true"
-        android:id="@+id/takeOptionsSpinner">
-    </Spinner>
+        android:layout_weight="2"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <com.annamooseity.nimsolver.NimPileView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/turnDisplay"
+                android:layout_above="@+id/outcomeInfo"
+                android:id="@+id/pile1"/>
+
+            <com.annamooseity.nimsolver.NimPileView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/turnDisplay"
+                android:layout_above="@+id/outcomeInfo"
+                android:id="@+id/pile2"/>
+
+            <com.annamooseity.nimsolver.NimPileView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/turnDisplay"
+                android:layout_above="@+id/outcomeInfo"
+                android:id="@+id/pile3"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <com.annamooseity.nimsolver.NimPileView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/turnDisplay"
+                android:layout_above="@+id/outcomeInfo"
+                android:id="@+id/pile4"/>
+
+            <com.annamooseity.nimsolver.NimPileView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/turnDisplay"
+                android:layout_above="@+id/outcomeInfo"
+                android:id="@+id/pile5"/>
+
+            <com.annamooseity.nimsolver.NimPileView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/turnDisplay"
+                android:layout_above="@+id/outcomeInfo"
+                android:id="@+id/pile6"/>
+
+        </LinearLayout>
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:id="@+id/messageToUser"
-        android:textSize="20dp"
-        android:layout_above="@id/takeOptionsSpinner"
-        android:text="How many chips do you want to take?"/>
+    </LinearLayout>
+
 
     <TextView
         android:layout_width="match_parent"
@@ -54,6 +100,27 @@
         />
 
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/messageToUser"
+        android:textSize="20dp"
+        android:text="How many chips do you want to take?"/>
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="30dp"
+        android:textSize="20dp"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/takeOptionsSpinner">
+    </Spinner>
 
 
-</RelativeLayout>
+
+
+
+
+</LinearLayout>
