@@ -30,24 +30,18 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/turnDisplay"
-                android:layout_above="@+id/outcomeInfo"
                 android:id="@+id/pile1"/>
 
             <com.annamooseity.nimsolver.NimPileView
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/turnDisplay"
-                android:layout_above="@+id/outcomeInfo"
                 android:id="@+id/pile2"/>
 
             <com.annamooseity.nimsolver.NimPileView
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/turnDisplay"
-                android:layout_above="@+id/outcomeInfo"
                 android:id="@+id/pile3"/>
 
         </LinearLayout>
@@ -63,24 +57,18 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/turnDisplay"
-                android:layout_above="@+id/outcomeInfo"
                 android:id="@+id/pile4"/>
 
             <com.annamooseity.nimsolver.NimPileView
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/turnDisplay"
-                android:layout_above="@+id/outcomeInfo"
                 android:id="@+id/pile5"/>
 
             <com.annamooseity.nimsolver.NimPileView
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/turnDisplay"
-                android:layout_above="@+id/outcomeInfo"
                 android:id="@+id/pile6"/>
 
         </LinearLayout>
@@ -95,7 +83,6 @@
         android:id="@+id/outcomeInfo"
         android:textSize="20dp"
         android:layout_marginBottom="10dp"
-        android:layout_above="@id/messageToUser"
         android:text="Outcome here blah blah"
         />
 

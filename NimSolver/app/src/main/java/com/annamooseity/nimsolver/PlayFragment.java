@@ -3,12 +3,14 @@ package com.annamooseity.nimsolver;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 
 
 /**
@@ -33,14 +35,19 @@ public class PlayFragment extends Fragment
         // Required empty public constructor
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
         // Inflate the layout for this fragment
+        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
         setHasOptionsMenu(true);
-
         return inflater.inflate(R.layout.fragment_play, container, false);
     }
 
@@ -74,7 +81,7 @@ public class PlayFragment extends Fragment
         }
         else if(title.equals(helpStr))
         {
-            // Call the help dialog!
+            MainActivity.displayHelpDialog(getContext());
             return false;
         }
         else if(title.equals(restartStr))

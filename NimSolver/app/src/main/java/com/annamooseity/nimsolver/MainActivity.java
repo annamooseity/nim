@@ -1,6 +1,7 @@
 package com.annamooseity.nimsolver;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.net.Uri;
@@ -42,6 +43,8 @@ public class MainActivity extends AppCompatActivity
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.container, new StartFragment())
                 .commit();
+
+       getSupportActionBar().hide();
     }
 
     @Override
@@ -64,23 +67,28 @@ public class MainActivity extends AppCompatActivity
 
             // How-To
             case 2:
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-                builder.setCancelable(false);
-                builder.setTitle("How to play Nim");
-                builder.setMessage("Nim, a mathematical game of strategy, is not a difficult " +
-                        "game to learn even if you are allergic to math. \n \n" +
-                        "Players take turns removing coins, chips, or beans from the piles. " +
-                        "The amount of chips you can remove on your turn depends on the rules " +
-                        "set in the beginning. If there are multiple piles, you can only take " +
-                        "chips from one pile. \n \n" +
-                        "The player to take the last chip is the winner!");
-                builder.setPositiveButton("Got it!", null);
-                builder.show();
+                displayHelpDialog(this);
                 break;
             default:
                 break;
         }
+    }
+
+    public static void displayHelpDialog(Context c)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(c);
+
+        builder.setCancelable(false);
+        builder.setTitle("How to play Nim");
+        builder.setMessage("Nim, a mathematical game of strategy, is not a difficult " +
+                "game to learn even if you are allergic to math. \n \n" +
+                "Players take turns removing coins, chips, or beans from the piles. " +
+                "The amount of chips you can remove on your turn depends on the rules " +
+                "set in the beginning. If there are multiple piles, you can only take " +
+                "chips from one pile. \n \n" +
+                "The player to take the last chip is the winner!");
+        builder.setPositiveButton("Got it!", null);
+        builder.show();
     }
 
     /**
@@ -148,6 +156,9 @@ public class MainActivity extends AppCompatActivity
     public void playGame(NimGame game)
     {
         // play the game
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, new PlayFragment())
+                .addToBackStack("newTrans").commit();
     }
 
     /**
