@@ -139,7 +139,18 @@ public class MainActivity extends AppCompatActivity
                 {
                     otherPlayerName = otherPlayer.getText().toString();
                 }
-                playGame(new NimGame(rules, rules.getPiles(), 0, otherPlayerName, position + 1));
+
+                // save a copy of the new game
+
+                NimGame game = new NimGame(rules, rules.getPiles(), 0, otherPlayerName, position + 1);
+                String[] values = {Arrays.toString(game.getPiles()),
+                        Integer.toString(game.getRulesIndex()),
+                        game.getOtherPlayerName(),
+                        Integer.toString(game.getMove())};
+                ContentValues cv = createData(NimGame.no_id_projection, values);
+                // Send data to database
+                getContentResolver().insert(NimGame.CONTENT_URI_game, cv);
+                playGame(game);
                         // Save new game
             }
         });
@@ -155,6 +166,11 @@ public class MainActivity extends AppCompatActivity
      */
     public void playGame(NimGame game)
     {
+
+
+
+
+
         // play the game
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, new PlayFragment())

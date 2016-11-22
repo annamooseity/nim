@@ -22,6 +22,16 @@ public class NimGame
     public static String[] projection = new String[]{GAME_ID, PILES, RULES_INDEX, OPPONENT, MOVE};
     public static String[] no_id_projection = new String[] {PILES, RULES_INDEX, OPPONENT, MOVE};
 
+    public int getRulesIndex()
+    {
+        return rulesIndex;
+    }
+
+    public void setRulesIndex(int rulesIndex)
+    {
+        this.rulesIndex = rulesIndex;
+    }
+
     // Actual game parameters
     private int rulesIndex;
     private int lastPlayedOn;
@@ -30,6 +40,18 @@ public class NimGame
     private int move;
     private boolean isOver = false;
     private String otherPlayerName = "";
+
+    public int getDatabaseIndex()
+    {
+        return databaseIndex;
+    }
+
+    public void setDatabaseIndex(int databaseIndex)
+    {
+        this.databaseIndex = databaseIndex;
+    }
+
+    private int databaseIndex = -1;
 
     public NimRules getRules()
     {

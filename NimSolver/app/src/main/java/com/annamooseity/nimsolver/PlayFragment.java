@@ -1,5 +1,6 @@
 package com.annamooseity.nimsolver;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+
+import java.util.Arrays;
 
 
 /**
@@ -53,6 +56,7 @@ public class PlayFragment extends Fragment
 
     /**
      * Creates custom options menu
+     *
      * @param menu
      * @param inflater
      */
@@ -66,25 +70,42 @@ public class PlayFragment extends Fragment
 
     /**
      * Handles behavior of our custom menu
+     *
      * @param item item selected from options
      * @return whether or not the item was in the main dropdown
      */
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
 
         String title = item.getTitle().toString();
 
-        if(title.equals(saveStr))
+        if (title.equals(saveStr))
         {
-            mListener.onSaveGame();
+            String[] values = {Arrays.toString(game.getPiles()),
+                    Integer.toString(game.getRulesIndex()),
+                    game.getOtherPlayerName(),
+                    Integer.toString(game.getMove())};
+            ContentValues cv = MainActivity.createData(NimGame.no_id_projection, values);
+
+            // TODO check if this is right
+            // Goes and looks for the game and updates it
+
+            String[] selectionArgs = {Integer.toString(game.getMove()), game.getOtherPlayerName(),  Arrays.toString(game.getPiles()), Integer.toString(game.getRulesIndex())};
+            getActivity().getContentResolver().update(NimGame.CONTENT_URI_game, cv,
+                    NimGame.MOVE + "=? AND " +
+                            NimGame.OPPONENT + "=? AND" +
+                            NimGame.PILES + "=? AND" +
+                            NimGame.RULES_INDEX + "=?", selectionArgs);
+
             return false;
         }
-        else if(title.equals(helpStr))
+        else if (title.equals(helpStr))
         {
             MainActivity.displayHelpDialog(getContext());
             return false;
         }
-        else if(title.equals(restartStr))
+        else if (title.equals(restartStr))
         {
             restart();
             return false;
@@ -129,6 +150,7 @@ public class PlayFragment extends Fragment
     public interface OnGamePlayListener
     {
         void onGameOver();
+
         void onSaveGame();
     }
 }
