@@ -36,6 +36,8 @@ public class PlayFragment extends Fragment
     private OnGamePlayListener mListener;
     private NimPileView nimPileView;
     private int numPiles = 5;
+    private NimPileView pile1, pile2, pile3, pile4, pile5, pile6, currentHighlightView;
+    private NimPileView[] pileArray = {pile1, pile2, pile3, pile4, pile5, pile6};
 
     public PlayFragment()
     {
@@ -55,13 +57,36 @@ public class PlayFragment extends Fragment
         // Inflate the layout for this fragment
         ((AppCompatActivity) getActivity()).getSupportActionBar().show();
         setHasOptionsMenu(true);
-        View view =  inflater.inflate(R.layout.fragment_play, container, false);
+        View view = inflater.inflate(R.layout.fragment_play, container, false);
 
         setUpPiles(view);
+
+        View.OnClickListener pileListener = new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                NimPileView nimView = (NimPileView) view;
+                setHighlighted(nimView);
+            }
+        };
 
 
 
         return view;
+    }
+
+    // TODO optimized
+    private void setHighlighted(NimPileView view)
+    {
+        if(currentHighlightView != null)
+        {
+            currentHighlightView.setPileHighlighted(false);
+        }
+
+        view.setPileHighlighted(true);
+
+        currentHighlightView = view;
     }
 
     /**
@@ -70,17 +95,17 @@ public class PlayFragment extends Fragment
 
     private void setUpPiles(View view)
     {
-        NimPileView pile1 = (NimPileView) view.findViewById(R.id.pile1);
-        NimPileView pile2 = (NimPileView) view.findViewById(R.id.pile2);
-        NimPileView pile3 = (NimPileView) view.findViewById(R.id.pile3);
-        NimPileView pile4 = (NimPileView) view.findViewById(R.id.pile4);
-        NimPileView pile5 = (NimPileView) view.findViewById(R.id.pile5);
-        NimPileView pile6 = (NimPileView) view.findViewById(R.id.pile6);
+        pile1 = (NimPileView) view.findViewById(R.id.pile1);
+        pile2 = (NimPileView) view.findViewById(R.id.pile2);
+        pile3 = (NimPileView) view.findViewById(R.id.pile3);
+        pile4 = (NimPileView) view.findViewById(R.id.pile4);
+        pile5 = (NimPileView) view.findViewById(R.id.pile5);
+        pile6 = (NimPileView) view.findViewById(R.id.pile6);
 
         LinearLayout.LayoutParams all = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 3);
         LinearLayout.LayoutParams half = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1.5f);
 
-        switch(numPiles)
+        switch (numPiles)
         {
             case 1:
                 pile2.setVisibility(View.GONE);
@@ -114,7 +139,7 @@ public class PlayFragment extends Fragment
             case 5:
                 pile6.setVisibility(View.GONE);
                 pile4.setLayoutParams(half);
-               pile5.setLayoutParams(half);
+                pile5.setLayoutParams(half);
 
                 break;
             default:
@@ -160,7 +185,7 @@ public class PlayFragment extends Fragment
             // TODO check if this is right
             // Goes and looks for the game and updates it
 
-            String[] selectionArgs = {Integer.toString(game.getMove()), game.getOtherPlayerName(),  Arrays.toString(game.getPiles()), Integer.toString(game.getRulesIndex())};
+            String[] selectionArgs = {Integer.toString(game.getMove()), game.getOtherPlayerName(), Arrays.toString(game.getPiles()), Integer.toString(game.getRulesIndex())};
             getActivity().getContentResolver().update(NimGame.CONTENT_URI_game, cv,
                     NimGame.MOVE + "=? AND " +
                             NimGame.OPPONENT + "=? AND" +

@@ -21,7 +21,7 @@ public class NimPileView extends View
 {
 
     private int count = 24;
-
+    boolean highlighted = false;
 
     public NimPileView(Context context)
     {
@@ -65,6 +65,14 @@ public class NimPileView extends View
         int[] center = {canvas.getWidth()/2, canvas.getHeight()/2};
         setBackgroundColor(Color.TRANSPARENT);
         Paint paint = new Paint();
+
+
+        if(highlighted)
+        {
+            paint.setColor(Color.WHITE);
+            canvas.drawCircle(center[0], center[1], canvas.getHeight()*0.30f, paint);
+        }
+
         paint.setColor(Color.parseColor("#A364FF"));
 
         canvas.drawCircle(center[0], center[1], canvas.getHeight()*0.25f, paint);
@@ -77,6 +85,11 @@ public class NimPileView extends View
         paint.setFakeBoldText(true);
         paint.setTextAlign(Paint.Align.CENTER);
         canvas.drawText(str, center[0], center[1] + (textBounds.height()/2), paint);
+    }
+
+    public void setPileHighlighted(boolean highlight)
+    {
+        highlighted = highlight;
     }
 
 }
