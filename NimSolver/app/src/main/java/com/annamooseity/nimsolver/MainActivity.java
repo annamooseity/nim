@@ -205,15 +205,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     /**
-     * Save Game
-     */
-    @Override
-    public void onSaveGame()
-    {
-
-    }
-
-    /**
      * Creates content values from a string array for a database
      * Stolen from my teacher, Jim Ward, at University of Wyoming
      * @param key the name of the database column

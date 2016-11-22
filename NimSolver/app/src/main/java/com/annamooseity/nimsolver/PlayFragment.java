@@ -12,6 +12,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.LinearLayout;
+
+import java.util.Arrays;
 
 import java.util.Arrays;
 
@@ -32,6 +35,7 @@ public class PlayFragment extends Fragment
     private NimGame game;
     private OnGamePlayListener mListener;
     private NimPileView nimPileView;
+    private int numPiles = 5;
 
     public PlayFragment()
     {
@@ -51,7 +55,72 @@ public class PlayFragment extends Fragment
         // Inflate the layout for this fragment
         ((AppCompatActivity) getActivity()).getSupportActionBar().show();
         setHasOptionsMenu(true);
-        return inflater.inflate(R.layout.fragment_play, container, false);
+        View view =  inflater.inflate(R.layout.fragment_play, container, false);
+
+        setUpPiles(view);
+
+
+
+        return view;
+    }
+
+    /**
+     * Lays out our nim piles neatly for us
+     */
+
+    private void setUpPiles(View view)
+    {
+        NimPileView pile1 = (NimPileView) view.findViewById(R.id.pile1);
+        NimPileView pile2 = (NimPileView) view.findViewById(R.id.pile2);
+        NimPileView pile3 = (NimPileView) view.findViewById(R.id.pile3);
+        NimPileView pile4 = (NimPileView) view.findViewById(R.id.pile4);
+        NimPileView pile5 = (NimPileView) view.findViewById(R.id.pile5);
+        NimPileView pile6 = (NimPileView) view.findViewById(R.id.pile6);
+
+        LinearLayout.LayoutParams all = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 3);
+        LinearLayout.LayoutParams half = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1.5f);
+
+        switch(numPiles)
+        {
+            case 1:
+                pile2.setVisibility(View.GONE);
+                pile3.setVisibility(View.GONE);
+                pile4.setVisibility(View.GONE);
+                pile5.setVisibility(View.GONE);
+                pile6.setVisibility(View.GONE);
+
+                pile1.setLayoutParams(all);
+                break;
+            case 2:
+                pile3.setVisibility(View.GONE);
+                pile4.setVisibility(View.GONE);
+                pile5.setVisibility(View.GONE);
+                pile6.setVisibility(View.GONE);
+
+                pile1.setLayoutParams(half);
+                pile2.setLayoutParams(half);
+                break;
+            case 3:
+                pile4.setVisibility(View.GONE);
+                pile5.setVisibility(View.GONE);
+                pile6.setVisibility(View.GONE);
+                break;
+            case 4:
+                pile5.setVisibility(View.GONE);
+                pile6.setVisibility(View.GONE);
+
+                pile5.setLayoutParams(all);
+                break;
+            case 5:
+                pile6.setVisibility(View.GONE);
+                pile4.setLayoutParams(half);
+               pile5.setLayoutParams(half);
+
+                break;
+            default:
+                break;
+        }
+
     }
 
     /**
@@ -97,7 +166,7 @@ public class PlayFragment extends Fragment
                             NimGame.OPPONENT + "=? AND" +
                             NimGame.PILES + "=? AND" +
                             NimGame.RULES_INDEX + "=?", selectionArgs);
-
+            saveGame(game);
             return false;
         }
         else if (title.equals(helpStr))
@@ -122,6 +191,13 @@ public class PlayFragment extends Fragment
     private void restart()
     {
 
+    }
+
+    public void saveGame(NimGame game)
+    {
+        // Check if already saved (should be saved at very beginning)
+
+        // Update the current entry
     }
 
     @Override
@@ -150,7 +226,5 @@ public class PlayFragment extends Fragment
     public interface OnGamePlayListener
     {
         void onGameOver();
-
-        void onSaveGame();
     }
 }

@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.text.TextPaint;
 import android.util.AttributeSet;
@@ -13,11 +14,14 @@ import android.view.View;
 /**
  * NimPileView.java
  * Anna Carrigan
- *
- * Displays a gui version for our Nim Game
+ * <p>
+ * Displays a nim pile
  */
 public class NimPileView extends View
 {
+
+    private int count = 24;
+
 
     public NimPileView(Context context)
     {
@@ -42,15 +46,37 @@ public class NimPileView extends View
 
     }
 
-    private void invalidateTextPaintAndMeasurements()
+    public void setCount(int i)
     {
+        count = i;
+        invalidate();
+    }
 
+    public int getCount()
+    {
+        return count;
     }
 
     @Override
     protected void onDraw(Canvas canvas)
     {
+        super.onDraw(canvas);
 
+        int[] center = {canvas.getWidth()/2, canvas.getHeight()/2};
+        setBackgroundColor(Color.TRANSPARENT);
+        Paint paint = new Paint();
+        paint.setColor(Color.parseColor("#A364FF"));
+
+        canvas.drawCircle(center[0], center[1], canvas.getHeight()*0.25f, paint);
+
+        Rect textBounds = new Rect();
+        String str = Integer.toString(count);
+        paint.setTextSize(canvas.getHeight()*0.15f);
+        paint.getTextBounds(str, 0, str.length(), textBounds);
+        paint.setColor(Color.WHITE);
+        paint.setFakeBoldText(true);
+        paint.setTextAlign(Paint.Align.CENTER);
+        canvas.drawText(str, center[0], center[1] + (textBounds.height()/2), paint);
     }
 
 }
