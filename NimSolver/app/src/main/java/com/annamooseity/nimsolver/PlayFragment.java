@@ -40,6 +40,7 @@ public class PlayFragment extends Fragment
     private int numPiles = 5;
     private NimPileView pile1, pile2, pile3, pile4, pile5, pile6, currentHighlightView;
 
+    private View thisView;
 
     private Spinner takeChipsSpinner;
     private Button takeChipsButton;
@@ -62,37 +63,36 @@ public class PlayFragment extends Fragment
         // Inflate the layout for this fragment
         ((AppCompatActivity) getActivity()).getSupportActionBar().show();
         setHasOptionsMenu(true);
-        View view = inflater.inflate(R.layout.fragment_play, container, false);
-
-        setUpPiles(view);
-
-        View.OnClickListener pileListener = new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                NimPileView nimView = (NimPileView) view;
-                setHighlighted(nimView);
-            }
-        };
-        pile1.setOnClickListener(pileListener);
-        pile2.setOnClickListener(pileListener);
-        pile3.setOnClickListener(pileListener);
-        pile4.setOnClickListener(pileListener);
-        pile5.setOnClickListener(pileListener);
-        pile6.setOnClickListener(pileListener);
+        thisView = inflater.inflate(R.layout.fragment_play, container, false);
 
 
-        takeChipsSpinner = (Spinner) view.findViewById(R.id.takeOptionsSpinner);
-        takeChipsButton = (Button) view.findViewById(R.id.takeTheChipsButton);
 
 
-        return view;
+
+
+        takeChipsSpinner = (Spinner) thisView.findViewById(R.id.takeOptionsSpinner);
+        takeChipsButton = (Button) thisView.findViewById(R.id.takeTheChipsButton);
+
+        setUpPiles();
+        return thisView;
     }
 
     public void setGame(NimGame game)
     {
         this.game = game;
+        int[] piles = game.getPiles();
+        int numPiles = 6;
+
+        for (int i = 1; i < 6; i++)
+        {
+            if(piles[i - 1] == 0)
+            {
+                numPiles = i - 1;
+                break;
+            }
+        }
+
+        this.numPiles = numPiles;
     }
 
     // TODO optimized
@@ -116,24 +116,35 @@ public class PlayFragment extends Fragment
 
     private void takeChips(int chipsToTake)
     {
-
+        int newCount = currentHighlightView.getCount() - (int) takeChipsSpinner.getSelectedItem();
+        currentHighlightView.setCount(newCount);
     }
 
     /**
      * Lays out our nim piles neatly for us
      */
 
-    private void setUpPiles(View view)
+    private void setUpPiles()
     {
-        pile1 = (NimPileView) view.findViewById(R.id.pile1);
-        pile2 = (NimPileView) view.findViewById(R.id.pile2);
-        pile3 = (NimPileView) view.findViewById(R.id.pile3);
-        pile4 = (NimPileView) view.findViewById(R.id.pile4);
-        pile5 = (NimPileView) view.findViewById(R.id.pile5);
-        pile6 = (NimPileView) view.findViewById(R.id.pile6);
+        pile1 = (NimPileView) thisView.findViewById(R.id.pile1);
+        pile2 = (NimPileView) thisView.findViewById(R.id.pile2);
+        pile3 = (NimPileView) thisView.findViewById(R.id.pile3);
+        pile4 = (NimPileView) thisView.findViewById(R.id.pile4);
+        pile5 = (NimPileView) thisView.findViewById(R.id.pile5);
+        pile6 = (NimPileView) thisView.findViewById(R.id.pile6);
 
         LinearLayout.LayoutParams all = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 3);
         LinearLayout.LayoutParams half = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1.5f);
+
+        View.OnClickListener pileListener = new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                NimPileView nimView = (NimPileView) view;
+                setHighlighted(nimView);
+            }
+        };
 
         switch (numPiles)
         {
@@ -143,6 +154,8 @@ public class PlayFragment extends Fragment
                 pile4.setVisibility(View.GONE);
                 pile5.setVisibility(View.GONE);
                 pile6.setVisibility(View.GONE);
+
+                pile1.setOnClickListener(pileListener);
 
                 pile1.setLayoutParams(all);
                 break;
@@ -154,28 +167,68 @@ public class PlayFragment extends Fragment
 
                 pile1.setLayoutParams(half);
                 pile2.setLayoutParams(half);
+
+                pile1.setOnClickListener(pileListener);
+                pile2.setOnClickListener(pileListener);
+
                 break;
             case 3:
                 pile4.setVisibility(View.GONE);
                 pile5.setVisibility(View.GONE);
                 pile6.setVisibility(View.GONE);
+
+                pile1.setOnClickListener(pileListener);
+                pile2.setOnClickListener(pileListener);
+                pile3.setOnClickListener(pileListener);
                 break;
             case 4:
                 pile5.setVisibility(View.GONE);
                 pile6.setVisibility(View.GONE);
-
+                pile1.setOnClickListener(pileListener);
+                pile2.setOnClickListener(pileListener);
+                pile3.setOnClickListener(pileListener);
+                pile4.setOnClickListener(pileListener);
                 pile5.setLayoutParams(all);
                 break;
             case 5:
                 pile6.setVisibility(View.GONE);
                 pile4.setLayoutParams(half);
                 pile5.setLayoutParams(half);
+                pile1.setOnClickListener(pileListener);
+                pile2.setOnClickListener(pileListener);
+                pile3.setOnClickListener(pileListener);
+                pile4.setOnClickListener(pileListener);
+                pile5.setOnClickListener(pileListener);
+
 
                 break;
             default:
+                pile1.setOnClickListener(pileListener);
+                pile2.setOnClickListener(pileListener);
+                pile3.setOnClickListener(pileListener);
+                pile4.setOnClickListener(pileListener);
+                pile5.setOnClickListener(pileListener);
+                pile6.setOnClickListener(pileListener);
                 break;
         }
 
+        switch(numPiles)
+        {
+            case 6:
+                pile6.setCount(game.getPiles()[5]);
+            case 5:
+                pile5.setCount(game.getPiles()[4]);
+            case 4:
+                pile4.setCount(game.getPiles()[3]);
+            case 3:
+                pile3.setCount(game.getPiles()[2]);
+            case 2:
+                pile2.setCount(game.getPiles()[1]);
+            case 1:
+                pile1.setCount(game.getPiles()[0]);
+            default:
+                break;
+        }
     }
 
     /**

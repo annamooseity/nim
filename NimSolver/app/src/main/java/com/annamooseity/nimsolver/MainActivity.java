@@ -177,6 +177,8 @@ public class MainActivity extends AppCompatActivity
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, frag)
                 .addToBackStack("newTrans").commit();
+
+
     }
 
     /**
@@ -186,6 +188,7 @@ public class MainActivity extends AppCompatActivity
     public void onRulesSaved()
     {
         // Go back to main screen if necessary
+        super.onBackPressed();
     }
 
     /**
@@ -253,5 +256,10 @@ public class MainActivity extends AppCompatActivity
     {
         // Start a new game with settings from database
 
+    }
+
+    public void goBack()
+    {
+        super.onBackPressed();
     }
 }
