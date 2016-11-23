@@ -95,8 +95,14 @@
         android:textSize="20dp"
         android:text="How many chips do you want to take?"/>
 
-    <Spinner
+    <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+    <Spinner
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="30dp"
@@ -104,6 +110,15 @@
         android:layout_alignParentBottom="true"
         android:id="@+id/takeOptionsSpinner">
     </Spinner>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Take!"
+            android:id="@+id/takeTheChipsButton"/>
+
+
+    </LinearLayout>
 
 
 

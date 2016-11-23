@@ -149,7 +149,8 @@ public class MainActivity extends AppCompatActivity
                         Integer.toString(game.getMove())};
                 ContentValues cv = createData(NimGame.no_id_projection, values);
                 // Send data to database
-                getContentResolver().insert(NimGame.CONTENT_URI_game, cv);
+               Uri uri =  getContentResolver().insert(NimGame.CONTENT_URI_game, cv);
+                Log.e("asdf", uri.toString());
                 playGame(game);
                         // Save new game
             }

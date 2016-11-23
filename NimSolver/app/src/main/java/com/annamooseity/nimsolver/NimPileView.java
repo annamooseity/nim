@@ -90,6 +90,7 @@ public class NimPileView extends View
     public void setPileHighlighted(boolean highlight)
     {
         highlighted = highlight;
+        invalidate();
     }
 
 }

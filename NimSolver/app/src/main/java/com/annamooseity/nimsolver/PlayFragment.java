@@ -12,7 +12,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 
 import java.util.Arrays;
 
@@ -37,7 +39,10 @@ public class PlayFragment extends Fragment
     private NimPileView nimPileView;
     private int numPiles = 5;
     private NimPileView pile1, pile2, pile3, pile4, pile5, pile6, currentHighlightView;
-    private NimPileView[] pileArray = {pile1, pile2, pile3, pile4, pile5, pile6};
+
+
+    private Spinner takeChipsSpinner;
+    private Button takeChipsButton;
 
     public PlayFragment()
     {
@@ -70,7 +75,16 @@ public class PlayFragment extends Fragment
                 setHighlighted(nimView);
             }
         };
+        pile1.setOnClickListener(pileListener);
+        pile2.setOnClickListener(pileListener);
+        pile3.setOnClickListener(pileListener);
+        pile4.setOnClickListener(pileListener);
+        pile5.setOnClickListener(pileListener);
+        pile6.setOnClickListener(pileListener);
 
+
+        takeChipsSpinner = (Spinner) view.findViewById(R.id.takeOptionsSpinner);
+        takeChipsButton = (Button) view.findViewById(R.id.takeTheChipsButton);
 
 
         return view;
@@ -87,6 +101,17 @@ public class PlayFragment extends Fragment
         view.setPileHighlighted(true);
 
         currentHighlightView = view;
+
+
+    }
+
+    /**
+     * Method for taking chips from pile
+     */
+
+    private void takeChips(int chipsToTake)
+    {
+
     }
 
     /**
