@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.text.TextPaint;
 import android.util.AttributeSet;
@@ -14,7 +15,7 @@ import android.view.View;
 /**
  * NimPileView.java
  * Anna Carrigan
- * <p>
+ * <p/>
  * Displays a nim pile
  */
 public class NimPileView extends View
@@ -22,6 +23,7 @@ public class NimPileView extends View
 
     private int count = 24;
     boolean highlighted = false;
+    boolean empty = false;
 
     public NimPileView(Context context)
     {
@@ -62,35 +64,64 @@ public class NimPileView extends View
     {
         super.onDraw(canvas);
 
-        int[] center = {canvas.getWidth()/2, canvas.getHeight()/2};
+        int[] center = {canvas.getWidth() / 2, canvas.getHeight() / 2};
         setBackgroundColor(Color.TRANSPARENT);
         Paint paint = new Paint();
 
 
-        if(highlighted)
+        if (highlighted)
         {
             paint.setColor(Color.WHITE);
-            canvas.drawCircle(center[0], center[1], canvas.getHeight()*0.28f, paint);
+            canvas.drawCircle(center[0], center[1], canvas.getHeight() * 0.28f, paint);
+        }
+        String str = Integer.toString(count);
+        if(!empty)
+        {
+            paint.setColor(Color.parseColor("#A364FF"));
+            paint.setTextSize(canvas.getHeight() * 0.15f);
+        }
+        else
+        {
+            paint.setColor(Color.parseColor("#E0E0E0"));
+            str = "Empty!";
+            paint.setTextSize(canvas.getHeight() * 0.13f);
         }
 
-        paint.setColor(Color.parseColor("#A364FF"));
-
-        canvas.drawCircle(center[0], center[1], canvas.getHeight()*0.25f, paint);
+        canvas.drawCircle(center[0], center[1], canvas.getHeight() * 0.25f, paint);
 
         Rect textBounds = new Rect();
-        String str = Integer.toString(count);
-        paint.setTextSize(canvas.getHeight()*0.15f);
+
+
         paint.getTextBounds(str, 0, str.length(), textBounds);
         paint.setColor(Color.WHITE);
         paint.setFakeBoldText(true);
         paint.setTextAlign(Paint.Align.CENTER);
+
         canvas.drawText(str, center[0], center[1] + (textBounds.height()/2), paint);
+
+
+
     }
 
     public void setPileHighlighted(boolean highlight)
     {
-        highlighted = highlight;
+        if (!empty)
+        {
+            highlighted = highlight;
+            invalidate();
+        }
+    }
+
+    public void setEmpty()
+    {
+        empty = true;
+        highlighted = false;
         invalidate();
+    }
+
+    public boolean isEmpty()
+    {
+        return empty;
     }
 
 }

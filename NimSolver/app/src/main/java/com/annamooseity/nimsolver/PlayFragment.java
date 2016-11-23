@@ -12,9 +12,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.Arrays;
 
@@ -38,6 +40,7 @@ public class PlayFragment extends Fragment
     private OnGamePlayListener mListener;
     private NimPileView nimPileView;
     private int numPiles = 5;
+    private String[] takeOptions;
     private NimPileView pile1, pile2, pile3, pile4, pile5, pile6, currentHighlightView;
 
     private View thisView;
@@ -71,7 +74,17 @@ public class PlayFragment extends Fragment
 
 
         takeChipsSpinner = (Spinner) thisView.findViewById(R.id.takeOptionsSpinner);
+
+        takeChipsSpinner.setAdapter(new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, takeOptions));
         takeChipsButton = (Button) thisView.findViewById(R.id.takeTheChipsButton);
+        takeChipsButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                takeChips(Integer.parseInt(takeChipsSpinner.getSelectedItem().toString()));
+            }
+        });
 
         setUpPiles();
         return thisView;
@@ -93,19 +106,35 @@ public class PlayFragment extends Fragment
         }
 
         this.numPiles = numPiles;
+
+        int[] rawOptions = game.getRules().getTakeOptions();
+        takeOptions = new String[rawOptions.length];
+
+        for (int i = 0; i < takeOptions.length; i++)
+        {
+            takeOptions[i] = Integer.toString(rawOptions[i]);
+        }
+
     }
 
     // TODO optimized
     private void setHighlighted(NimPileView view)
     {
-        if(currentHighlightView != null)
+        if (currentHighlightView != null)
         {
             currentHighlightView.setPileHighlighted(false);
+
+
+
         }
 
-        view.setPileHighlighted(true);
+        if(!view.isEmpty())
+        {
+            view.setPileHighlighted(true);
 
-        currentHighlightView = view;
+            currentHighlightView = view;
+        }
+
 
 
     }
@@ -116,8 +145,54 @@ public class PlayFragment extends Fragment
 
     private void takeChips(int chipsToTake)
     {
-        int newCount = currentHighlightView.getCount() - (int) takeChipsSpinner.getSelectedItem();
-        currentHighlightView.setCount(newCount);
+        if(currentHighlightView == null)
+        {
+            Toast.makeText(getActivity(), "Please select a pile to take from.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        int newCount = currentHighlightView.getCount() - chipsToTake;
+
+        if(newCount <= 0)
+        {
+            currentHighlightView.setCount(-1);
+            currentHighlightView.setEmpty();
+            currentHighlightView.setPileHighlighted(false);
+            currentHighlightView.invalidate();
+        }
+        else
+        {
+            currentHighlightView.setCount(newCount);
+        }
+
+        if(currentHighlightView.equals(pile1))
+        {
+            game.getPiles()[0] = pile1.getCount();
+        }
+        else if(currentHighlightView.equals(pile2))
+        {
+            game.getPiles()[1] = pile2.getCount();
+        }
+        else if(currentHighlightView.equals(pile3))
+        {
+            game.getPiles()[2] = pile3.getCount();
+        }
+        else if(currentHighlightView.equals(pile4))
+        {
+            game.getPiles()[3] = pile4.getCount();
+        }
+        else if(currentHighlightView.equals(pile5))
+        {
+            game.getPiles()[4] = pile5.getCount();
+        }
+        else if(currentHighlightView.equals(pile6))
+        {
+            game.getPiles()[5] = pile6.getCount();
+        }
+
+        currentHighlightView.setPileHighlighted(false);
+        currentHighlightView = null;
+
+
     }
 
     /**
