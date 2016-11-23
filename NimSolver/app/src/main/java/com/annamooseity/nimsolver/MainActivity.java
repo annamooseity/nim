@@ -170,11 +170,12 @@ public class MainActivity extends AppCompatActivity
 
 
 
-
+        PlayFragment frag = new PlayFragment();
+        frag.setGame(game);
 
         // play the game
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container, new PlayFragment())
+                .replace(R.id.container, frag)
                 .addToBackStack("newTrans").commit();
     }
 

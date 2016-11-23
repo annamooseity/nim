@@ -70,7 +70,7 @@ public class NimPileView extends View
         if(highlighted)
         {
             paint.setColor(Color.WHITE);
-            canvas.drawCircle(center[0], center[1], canvas.getHeight()*0.30f, paint);
+            canvas.drawCircle(center[0], center[1], canvas.getHeight()*0.28f, paint);
         }
 
         paint.setColor(Color.parseColor("#A364FF"));

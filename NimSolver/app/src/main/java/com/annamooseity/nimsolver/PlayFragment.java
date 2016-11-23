@@ -90,6 +90,11 @@ public class PlayFragment extends Fragment
         return view;
     }
 
+    public void setGame(NimGame game)
+    {
+        this.game = game;
+    }
+
     // TODO optimized
     private void setHighlighted(NimPileView view)
     {
@@ -213,8 +218,8 @@ public class PlayFragment extends Fragment
             String[] selectionArgs = {Integer.toString(game.getMove()), game.getOtherPlayerName(), Arrays.toString(game.getPiles()), Integer.toString(game.getRulesIndex())};
             getActivity().getContentResolver().update(NimGame.CONTENT_URI_game, cv,
                     NimGame.MOVE + "=? AND " +
-                            NimGame.OPPONENT + "=? AND" +
-                            NimGame.PILES + "=? AND" +
+                            NimGame.OPPONENT + "=? AND " +
+                            NimGame.PILES + "=? AND " +
                             NimGame.RULES_INDEX + "=?", selectionArgs);
             saveGame(game);
             return false;

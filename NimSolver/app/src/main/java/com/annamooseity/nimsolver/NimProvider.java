@@ -244,10 +244,12 @@ public class NimProvider extends ContentProvider
         switch (sUriMatcher.match(uri))
         {
             case GAME:
+            case GAME_ID:
                 notifyUri = NimGame.CONTENT_URI_game;
                 count = db.update(GAME_TABLE_NAME, values, where, whereArgs);
                 break;
             case RULES:
+            case RULES_ID:
                 notifyUri = NimRules.CONTENT_URI_rules;
                 count = db.update(RULES_TABLE_NAME, values, where, whereArgs);
                 break;
