@@ -5,7 +5,6 @@ import android.net.Uri;
 import com.annamooseity.nimsolver.NimRules;
 
 /**
- * NimGame.java
  * Anna Carrigan
  * Object class for a game of Nim
  */
@@ -35,9 +34,15 @@ public class NimGame
     // Actual game parameters
     private int rulesIndex;
     private int lastPlayedOn;
+
+    public void setRules(NimRules rules)
+    {
+        this.rules = rules;
+    }
+
     private NimRules rules;
     private int[] piles;
-    private int move;
+    private int move = 0;
     private boolean isOver = false;
     private String otherPlayerName = "";
 
@@ -93,10 +98,28 @@ public class NimGame
      * @param take number of chips to take
      * @param pileIndex which pile to take the chips from
      */
-    public void move(int take, int pileIndex)
+    public boolean move(int take, int pileIndex)
     {
-        piles[pileIndex] = piles[pileIndex] - take;
-        checkIfOver();
+        if (take < piles[pileIndex])
+        {
+            piles[pileIndex] = piles[pileIndex] - take;
+            checkIfOver();
+            move = move + 1;
+            return true;
+        }
+        else if(take == piles[pileIndex])
+        {
+            piles[pileIndex] = -1;
+            checkIfOver();
+            move = move + 1;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+
     }
 
     // TODO optimize

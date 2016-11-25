@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Arrays;
@@ -47,6 +48,11 @@ public class PlayFragment extends Fragment
 
     private Spinner takeChipsSpinner;
     private Button takeChipsButton;
+
+    String yourMove = "Your Move.";
+    String otherPlayerMove = "'s Move.";
+
+    TextView whosMove;
 
     public PlayFragment()
     {
@@ -86,6 +92,17 @@ public class PlayFragment extends Fragment
             }
         });
 
+        whosMove = (TextView) thisView.findViewById(R.id.turnDisplay);
+
+        if(game.getRules().getFirstPlayer() == 1)
+        {
+            whosMove.setText(yourMove);
+        }
+        else
+        {
+            whosMove.setText(otherPlayerMove);
+        }
+
         setUpPiles();
         return thisView;
     }
@@ -114,6 +131,8 @@ public class PlayFragment extends Fragment
         {
             takeOptions[i] = Integer.toString(rawOptions[i]);
         }
+
+        otherPlayerMove = game.getOtherPlayerName() + otherPlayerMove;
 
     }
 
@@ -150,49 +169,58 @@ public class PlayFragment extends Fragment
             Toast.makeText(getActivity(), "Please select a pile to take from.", Toast.LENGTH_SHORT).show();
             return;
         }
-        int newCount = currentHighlightView.getCount() - chipsToTake;
 
-        if(newCount <= 0)
+        int whichPile = 0;
+
+        if(currentHighlightView.equals(pile1))
+        {
+            whichPile = 1;
+        }
+        else if(currentHighlightView.equals(pile2))
+        {
+            whichPile = 2;
+        }
+        else if(currentHighlightView.equals(pile3))
+        {
+            whichPile = 3;
+        }
+        else if(currentHighlightView.equals(pile4))
+        {
+            whichPile = 4;
+        }
+        else if(currentHighlightView.equals(pile5))
+        {
+            whichPile = 5;
+        }
+        else if(currentHighlightView.equals(pile6))
+        {
+            whichPile = 6;
+        }
+
+        game.move(chipsToTake, whichPile - 1);
+
+        if(game.getPiles()[whichPile - 1] == -1)
         {
             currentHighlightView.setCount(-1);
             currentHighlightView.setEmpty();
-            currentHighlightView.setPileHighlighted(false);
             currentHighlightView.invalidate();
         }
         else
         {
-            currentHighlightView.setCount(newCount);
-        }
-
-        if(currentHighlightView.equals(pile1))
-        {
-            game.getPiles()[0] = pile1.getCount();
-        }
-        else if(currentHighlightView.equals(pile2))
-        {
-            game.getPiles()[1] = pile2.getCount();
-        }
-        else if(currentHighlightView.equals(pile3))
-        {
-            game.getPiles()[2] = pile3.getCount();
-        }
-        else if(currentHighlightView.equals(pile4))
-        {
-            game.getPiles()[3] = pile4.getCount();
-        }
-        else if(currentHighlightView.equals(pile5))
-        {
-            game.getPiles()[4] = pile5.getCount();
-        }
-        else if(currentHighlightView.equals(pile6))
-        {
-            game.getPiles()[5] = pile6.getCount();
+            currentHighlightView.setCount(game.getPiles()[whichPile - 1]);
         }
 
         currentHighlightView.setPileHighlighted(false);
         currentHighlightView = null;
 
-
+        if(whosMove.getText().equals(yourMove))
+        {
+            whosMove.setText(otherPlayerMove);
+        }
+        else
+        {
+            whosMove.setText(yourMove);
+        }
     }
 
     /**

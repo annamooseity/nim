@@ -215,10 +215,6 @@ public class NimProvider extends ContentProvider
             case RULES_ID:
                 qb.setTables(RULES_TABLE_NAME);
                 qb.setProjectionMap(rulesProjectionMap);
-                if (selection != null)
-                {
-                    selection = selection + "_id = " + uri.getLastPathSegment();
-                }
                 notifyUri = NimRules.CONTENT_URI_rules;
                 break;
             default:

@@ -150,7 +150,11 @@ public class MainActivity extends AppCompatActivity
                 ContentValues cv = createData(NimGame.no_id_projection, values);
                 // Send data to database
                Uri uri =  getContentResolver().insert(NimGame.CONTENT_URI_game, cv);
-                Log.e("asdf", uri.toString());
+
+
+
+
+
                 playGame(game);
                         // Save new game
             }
@@ -255,7 +259,7 @@ public class MainActivity extends AppCompatActivity
     public void onLoadGame(NimGame game)
     {
         // Start a new game with settings from database
-
+        playGame(game);
     }
 
     public void goBack()
