@@ -127,16 +127,16 @@ public class NimGame
     /**
      * Checks if the game is over
      */
-    private void checkIfOver()
+    public boolean checkIfOver()
     {
         for(int i = 0; i < piles.length; i++)
         {
-            if(piles[i] != 0)
+            if(piles[i] != -1 && piles[i] != 0)
             {
-                return;
+                return false;
             }
         }
         // Game is over.
-        isOver = true;
+        return true;
     }
 }

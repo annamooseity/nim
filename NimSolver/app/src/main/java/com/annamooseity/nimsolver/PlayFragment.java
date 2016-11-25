@@ -44,6 +44,7 @@ public class PlayFragment extends Fragment
     private String[] takeOptions;
     private NimPileView pile1, pile2, pile3, pile4, pile5, pile6, currentHighlightView;
     private String[] selectionArgs;
+    private boolean gameOver = false;
 
     private View thisView;
 
@@ -90,13 +91,31 @@ public class PlayFragment extends Fragment
 
         whosMove = (TextView) thisView.findViewById(R.id.turnDisplay);
 
+        // If moveMod is zero, first player's turn
+        // Ohterwise it's the second player's turn
+        int moveMod = game.getMove() % 2;
+
         if(game.getRules().getFirstPlayer() == 1)
         {
-            whosMove.setText(yourMove);
+            if(moveMod == 1)
+            {
+                whosMove.setText(otherPlayerMove);
+            }
+            else
+            {
+                whosMove.setText(yourMove);
+            }
         }
         else
         {
-            whosMove.setText(otherPlayerMove);
+            if(moveMod == 1)
+            {
+                whosMove.setText(yourMove);
+            }
+            else
+            {
+                whosMove.setText(otherPlayerMove);
+            }
         }
 
         setUpPiles();
@@ -135,7 +154,6 @@ public class PlayFragment extends Fragment
 
     }
 
-    // TODO optimized
     private void setHighlighted(NimPileView view)
     {
         if (currentHighlightView != null)
@@ -198,6 +216,8 @@ public class PlayFragment extends Fragment
 
         game.move(chipsToTake, whichPile - 1);
 
+        gameOver = game.checkIfOver();
+
         if(game.getPiles()[whichPile - 1] == -1)
         {
             currentHighlightView.setCount(-1);
@@ -212,14 +232,33 @@ public class PlayFragment extends Fragment
         currentHighlightView.setPileHighlighted(false);
         currentHighlightView = null;
 
-        if(whosMove.getText().equals(yourMove))
-        {
-            whosMove.setText(otherPlayerMove);
-        }
-        else
-        {
-            whosMove.setText(yourMove);
-        }
+
+            if (whosMove.getText().equals(yourMove))
+            {
+                if(!gameOver)
+                {
+                    whosMove.setText(otherPlayerMove);
+                }
+                else
+                {
+                    whosMove.setText("You won!");
+                }
+            }
+            else
+            {
+                if(!gameOver)
+                {
+                    whosMove.setText(yourMove);
+                }
+                else
+                {
+                    whosMove.setText(game.getOtherPlayerName() + " won!");
+                }
+            }
+
+
+
+
     }
 
     /**
