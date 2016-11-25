@@ -127,8 +127,6 @@ public class GameListFrag extends ListFragment implements LoaderManager.LoaderCa
 
     }
 
-
-
     @Override
     public void onAttach(Context context)
     {

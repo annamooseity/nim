@@ -43,6 +43,7 @@ public class PlayFragment extends Fragment
     private int numPiles = 5;
     private String[] takeOptions;
     private NimPileView pile1, pile2, pile3, pile4, pile5, pile6, currentHighlightView;
+    private String[] selectionArgs;
 
     private View thisView;
 
@@ -74,11 +75,6 @@ public class PlayFragment extends Fragment
         setHasOptionsMenu(true);
         thisView = inflater.inflate(R.layout.fragment_play, container, false);
 
-
-
-
-
-
         takeChipsSpinner = (Spinner) thisView.findViewById(R.id.takeOptionsSpinner);
 
         takeChipsSpinner.setAdapter(new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, takeOptions));
@@ -104,6 +100,9 @@ public class PlayFragment extends Fragment
         }
 
         setUpPiles();
+
+        selectionArgs = new String[]{Integer.toString(game.getMove()), game.getOtherPlayerName(), Arrays.toString(game.getPiles()), Integer.toString(game.getRulesIndex())};
+
         return thisView;
     }
 
@@ -371,7 +370,7 @@ public class PlayFragment extends Fragment
             // TODO check if this is right
             // Goes and looks for the game and updates it
 
-            String[] selectionArgs = {Integer.toString(game.getMove()), game.getOtherPlayerName(), Arrays.toString(game.getPiles()), Integer.toString(game.getRulesIndex())};
+
             getActivity().getContentResolver().update(NimGame.CONTENT_URI_game, cv,
                     NimGame.MOVE + "=? AND " +
                             NimGame.OPPONENT + "=? AND " +
