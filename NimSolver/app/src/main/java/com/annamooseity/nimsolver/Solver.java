@@ -25,7 +25,14 @@ public class Solver
 
         for(int i = 0; i < sgArray.length; i++)
         {
-            sgArray[i] = new int[piles[i] + 1];
+            if(piles[i] == -1)
+            {
+                sgArray[i] = new int[1];
+            }
+            else
+            {
+                sgArray[i] = new int[piles[i] + 1];
+            }
         }
 
         takeOptions = game.getRules().getTakeOptions();
@@ -50,7 +57,7 @@ public class Solver
                 {
                     if (takeOptions[k] <= j && sgArray[i][j - takeOptions[k]] == 0)
                     {
-                        sgArray[i][j] = 0;
+                        sgArray[i][j] = sgArray[i][j-1] + 1;
                         found = true;
                         break;
                     }
@@ -58,7 +65,7 @@ public class Solver
 
                 if (!found)
                 {
-                    sgArray[i][j] = sgArray[i][j - 1] + 1;
+                    sgArray[i][j] = 0;
                 }
                 else
                 {
@@ -76,35 +83,47 @@ public class Solver
         // Go through each pile and look to see if there's a way to move to a 0 nim sum position...
         // If there is then this is a winning move
 
-        for (int i = 0; i < sgArray.length; i++)
+
+
+
+        for(int i = 0; i < sgArray.length; i++)
         {
-            // Try different take optoins for each pile
-            for (int j = 0; j < takeOptions.length; j++)
+            if(!(piles[i] == 0) && !(piles[i] == -1))
             {
-                // Find the nim sum
-
-                int nimSum = 0;
-
-                for(int k = 0; k < sgArray.length; k++)
+                for (int j = 0; j < takeOptions.length; j++)
                 {
-                    if(k != i)
+                    // Add up the nim Sum
+                    int nimSum = 0;
+                    for (int k = 0; k < sgArray.length; k++)
                     {
-                        nimSum = nimSum ^ sgArray[i][sgArray[i].length - 1];
+                        // If its the pile we are looking at taking from, we need to account for new nim Sum
+
+                        if (i == k)
+                        {
+                            if(takeOptions[j] < sgArray[k].length)
+                            {
+                                int sg = (sgArray[k][sgArray[k].length - 1 - takeOptions[j]]);
+                                nimSum = nimSum ^ sg;
+                            }
+                        }
+
+                        else
+                        {
+                            int sg = (sgArray[k][sgArray[k].length - 1]);
+                            nimSum = nimSum ^ sg;
+                        }
                     }
-                    else
+
+                    if (nimSum == 0)
                     {
-                        nimSum = nimSum ^ sgArray[i][sgArray[i].length - 1 - takeOptions[j]];
+                        return new Pair(i, takeOptions[j]);
                     }
                 }
-
-                if(nimSum == 0)
-                {
-                    return new Pair(i, takeOptions[j]);
-                }
-
             }
-
         }
+
+
+
 
         return new Pair(0, 0);
     }

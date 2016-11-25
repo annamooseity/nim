@@ -65,7 +65,7 @@ public class GameListFrag extends ListFragment implements LoaderManager.LoaderCa
                     public void onClick(DialogInterface dialogInterface, int i)
                     {
                         String[] args = {Integer.toString(index)};
-                        getActivity().getContentResolver().delete(NimGame.CONTENT_URI_game, NimGame.GAME_ID + "=?", args);
+                        getActivity().getContentResolver().delete(NimGame.CONTENT_URI_game, NimGame.GAME_ID + "=" + index, null);
                     }
                 });
 

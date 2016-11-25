@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -47,6 +48,7 @@ public class PlayFragment extends Fragment
     private boolean gameOver = false;
 
     private View thisView;
+    private TextView advice;
 
     private Spinner takeChipsSpinner;
     private Button takeChipsButton;
@@ -90,6 +92,7 @@ public class PlayFragment extends Fragment
         });
 
         whosMove = (TextView) thisView.findViewById(R.id.turnDisplay);
+        advice = (TextView) thisView.findViewById(R.id.outcomeInfo);
 
         // If moveMod is zero, first player's turn
         // Ohterwise it's the second player's turn
@@ -121,7 +124,7 @@ public class PlayFragment extends Fragment
         setUpPiles();
 
         selectionArgs = new String[]{Integer.toString(game.getMove()), game.getOtherPlayerName(), Arrays.toString(game.getPiles()), Integer.toString(game.getRulesIndex())};
-
+        displaySolverInfo();
         return thisView;
     }
 
@@ -233,6 +236,7 @@ public class PlayFragment extends Fragment
         currentHighlightView = null;
 
 
+
             if (whosMove.getText().equals(yourMove))
             {
                 if(!gameOver)
@@ -257,8 +261,64 @@ public class PlayFragment extends Fragment
             }
 
 
+        if(!gameOver)
+        {
+            displaySolverInfo();
+        }
 
+    }
 
+    private void displaySolverInfo()
+    {
+        Solver solver = new Solver(game);
+
+        boolean currentPlayerWins = solver.currentPlayerWins();
+
+        Pair<Integer, Integer> optimalMove = solver.nextMove();
+
+        String str = "With optimal play, ";
+
+        int currentPlayer = 1;
+        if(!whosMove.getText().equals(yourMove))
+        {
+            currentPlayer = 2;
+        }
+
+        // prep for players next move
+        if(currentPlayerWins)
+        {
+            switch(currentPlayer)
+            {
+                case 1:
+                    str = str + "you will win!";
+                    break;
+                case 2:
+                    str = str + game.getOtherPlayerName() + " will win!";
+                    break;
+                default:
+                    break;
+            }
+        }
+        else
+        {
+            switch(currentPlayer)
+            {
+                case 2:
+                    str = str + "you will win!";
+                    break;
+                case 1:
+                    str = str + game.getOtherPlayerName() + " will win!";
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        if(currentPlayerWins && currentPlayer == 1)
+        {
+            str = str + " To continue winning, take " + optimalMove.second + " chip(s) from Pile " + (optimalMove.first + 1);
+        }
+        advice.setText(str);
     }
 
     /**
