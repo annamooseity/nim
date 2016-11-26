@@ -98,37 +98,69 @@ public class PlayFragment extends Fragment
         whosMove = (TextView) thisView.findViewById(R.id.turnDisplay);
         advice = (TextView) thisView.findViewById(R.id.outcomeInfo);
 
+        gameOver = game.checkIfOver();
+        selectionArgs = new String[]{Integer.toString(game.getMove()), game.getOtherPlayerName(), Arrays.toString(game.getPiles()), Integer.toString(game.getRulesIndex())};
+        displaySolverInfo();
+
         // If moveMod is zero, first player's turn
-        // Ohterwise it's the second player's turn
+        // Otherwise it's the second player's turn
+        setUpPiles();
+
         int moveMod = game.getMove() % 2;
 
         if(game.getRules().getFirstPlayer() == 1)
         {
             if(moveMod == 1)
             {
-                whosMove.setText(otherPlayerMove);
+                if(gameOver)
+                {
+                    whosMove.setText("You won!");
+                }
+                else
+                {
+                    whosMove.setText(otherPlayerMove);
+                }
+
             }
             else
             {
-                whosMove.setText(yourMove);
+                if(gameOver)
+                {
+                    whosMove.setText(game.getOtherPlayerName() + " won!");
+                }
+                else
+                {
+                    whosMove.setText(yourMove);
+                }
+
             }
         }
         else
         {
             if(moveMod == 1)
             {
-                whosMove.setText(yourMove);
+                if(gameOver)
+                {
+                    whosMove.setText(game.getOtherPlayerName() + " won!");
+                }
+                else
+                {
+                    whosMove.setText(yourMove);
+                }
             }
             else
             {
-                whosMove.setText(otherPlayerMove);
+                if(gameOver)
+                {
+                    whosMove.setText("You won!");
+                }
+                else
+                {
+                    whosMove.setText(otherPlayerMove);
+                }
             }
         }
 
-        setUpPiles();
-
-        selectionArgs = new String[]{Integer.toString(game.getMove()), game.getOtherPlayerName(), Arrays.toString(game.getPiles()), Integer.toString(game.getRulesIndex())};
-        displaySolverInfo();
         return thisView;
     }
 
@@ -281,6 +313,11 @@ public class PlayFragment extends Fragment
 
     private void displaySolverInfo()
     {
+        if(gameOver)
+        {
+            advice.setText("");
+            return;
+        }
         Solver solver = new Solver(game);
 
         boolean currentPlayerWins = solver.currentPlayerWins();
@@ -427,16 +464,40 @@ public class PlayFragment extends Fragment
         switch(numPiles)
         {
             case 6:
+                if(game.getPiles()[5] == -1)
+                {
+                    pile6.setEmpty();
+                }
                 pile6.setCount(game.getPiles()[5]);
             case 5:
+                if(game.getPiles()[4] == -1)
+                {
+                    pile5.setEmpty();
+                }
                 pile5.setCount(game.getPiles()[4]);
             case 4:
+                if(game.getPiles()[3] == -1)
+                {
+                    pile4.setEmpty();
+                }
                 pile4.setCount(game.getPiles()[3]);
             case 3:
+                if(game.getPiles()[2] == -1)
+                {
+                    pile3.setEmpty();
+                }
                 pile3.setCount(game.getPiles()[2]);
             case 2:
+                if(game.getPiles()[1] == -1)
+                {
+                    pile2.setEmpty();
+                }
                 pile2.setCount(game.getPiles()[1]);
             case 1:
+                if(game.getPiles()[0] == -1)
+                {
+                    pile1.setEmpty();
+                }
                 pile1.setCount(game.getPiles()[0]);
             default:
                 break;

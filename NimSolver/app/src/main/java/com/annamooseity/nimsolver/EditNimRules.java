@@ -123,14 +123,15 @@ public class EditNimRules extends Fragment
 
                     // Send data to database
                     getActivity().getContentResolver().insert(NimRules.CONTENT_URI_rules, cv);
+                    // Wrap it up in the Main Activity
+                    mListener.onRulesSaved();
                 }
                 else
                 {
                     Toast.makeText(getContext(), "Something went wrong. Please double check your input.", Toast.LENGTH_SHORT).show();
                 }
 
-                // Wrap it up in the Main Activity
-                mListener.onRulesSaved();
+
             }
         });
 
@@ -228,7 +229,25 @@ public class EditNimRules extends Fragment
             takeOptions.setError("Enter numbers separated by commas.");
         }
         else {
-            takeOptions.setError(null);
+            boolean oneFound = false;
+
+            for(int i = 0; i < takeOpts.length; i++)
+            {
+                if(takeOpts[i] == 1)
+                {
+                    oneFound = true;
+                }
+            }
+
+            if(oneFound == true)
+            {
+                takeOptions.setError(null);
+            }
+            else
+            {
+                takeOptions.setError("Users must be able to take one chip to prevent draws.");
+                valid = false;
+            }
         }
 
         int[] pileAmts = getPileAmts();
@@ -300,6 +319,7 @@ public class EditNimRules extends Fragment
         String[] opts = optsRaw.split(",");
 
         int nonZeroCount = 0;
+
 
         // Input validation
         for (String opt : opts) {
