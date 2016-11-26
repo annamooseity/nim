@@ -120,17 +120,17 @@ public class MainActivity extends AppCompatActivity
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View dialogView = View.inflate(this, R.layout.new_game_dialog, null);
-        final Switch dialogSwitch = (Switch) dialogView.findViewById(R.id.aiSwitch);
-        final ViewSwitcher playAISwitcher = (ViewSwitcher) dialogView.findViewById(R.id.playerNameSwitcher);
+      //  final Switch dialogSwitch = (Switch) dialogView.findViewById(R.id.aiSwitch);
+       // final ViewSwitcher playAISwitcher = (ViewSwitcher) dialogView.findViewById(R.id.playerNameSwitcher);
         final EditText otherPlayer = (EditText) dialogView.findViewById(R.id.otherPlayerName_dialog);
-        dialogSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+       /* dialogSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
         {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b)
             {
                 playAISwitcher.showNext();
             }
-        });
+        }); */
         builder.setTitle("Start a New Game");
         builder.setView(dialogView);
         builder.setPositiveButton("Let's go!", new DialogInterface.OnClickListener()
@@ -139,10 +139,10 @@ public class MainActivity extends AppCompatActivity
             public void onClick(DialogInterface dialogInterface, int i)
             {
                 String otherPlayerName = "";
-                if(!dialogSwitch.isChecked())
+      /*          if(!dialogSwitch.isChecked())
                 {
                     otherPlayerName = otherPlayer.getText().toString();
-                }
+                }*/
 
                 // save a copy of the new game
 
