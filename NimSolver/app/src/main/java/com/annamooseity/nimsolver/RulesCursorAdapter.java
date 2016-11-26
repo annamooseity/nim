@@ -34,14 +34,56 @@ public class RulesCursorAdapter extends CursorAdapter
     @Override
     public void bindView(View view, Context context, Cursor cursor)
     {
-        TextView numPiles = (TextView) view.findViewById(R.id.piles_rulesList);
+        TextView piles = (TextView) view.findViewById(R.id.piles_rulesList);
         TextView firstPlayer = (TextView) view.findViewById(R.id.firstPlayer_rulesList);
         TextView takeOptions = (TextView) view.findViewById(R.id.takeOptions_rulesList);
 
+        String str = "Piles of ";
         NimRules rules = getRules(cursor.getPosition());
-        firstPlayer.setText(String.valueOf(rules.getFirstPlayer()));
-        takeOptions.setText(Arrays.toString(rules.getTakeOptions()));
-        numPiles.setText(String.valueOf(rules.getPiles().length));
+        int[] pileArray = rules.getPiles();
+        boolean firstComma = true;
+        for (int i = 0; i < 6; i++)
+        {
+            if(pileArray[i] != 0)
+            {
+                if(firstComma)
+                {
+                    str = str + Integer.toString(pileArray[i]);
+                    firstComma = false;
+                }
+                else
+                {
+                    str = str + ", " + Integer.toString(pileArray[i]);
+                }
+            }
+        }
+
+        str = str + " chip(s)";
+        piles.setText(str);
+
+        if(rules.getFirstPlayer() == 1)
+        {
+            str = "You go first.";
+        }
+        else
+        {
+            str = "Your opponent goes first.";
+        }
+
+        firstPlayer.setText(str);
+
+        int[] takeOptionsArray = rules.getTakeOptions();
+
+        str = "Take " + takeOptionsArray[0];
+
+            for (int i = 1; i < takeOptionsArray.length; i++)
+            {
+                str = str + ", " + takeOptionsArray[i];
+            }
+
+        str =  str + " chip(s)";
+
+        takeOptions.setText(str);
     }
 
     /**

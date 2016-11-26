@@ -8,21 +8,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/piles_rulesList"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="20dp"
         android:text="Number of piles"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/takeOptions_rulesList"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="20dp"
         android:text="Take Options"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/firstPlayer_rulesList"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="20dp"
+        android:textStyle="italic"
         android:text="Player Blah goes first"/>
 
 </LinearLayout>
