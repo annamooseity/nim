@@ -2,8 +2,10 @@ package com.annamooseity.nimsolver;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Pair;
 import android.view.LayoutInflater;
@@ -57,6 +59,8 @@ public class PlayFragment extends Fragment
     String otherPlayerMove = "'s Move.";
 
     TextView whosMove;
+
+    public boolean changed = false;
 
     public PlayFragment()
     {
@@ -217,29 +221,30 @@ public class PlayFragment extends Fragment
             whichPile = 6;
         }
 
-        game.move(chipsToTake, whichPile - 1);
+        boolean moveSuccess = game.move(chipsToTake, whichPile - 1);
 
-        gameOver = game.checkIfOver();
-
-        if(game.getPiles()[whichPile - 1] == -1)
+        if(moveSuccess)
         {
-            currentHighlightView.setCount(-1);
-            currentHighlightView.setEmpty();
-            currentHighlightView.invalidate();
-        }
-        else
-        {
-            currentHighlightView.setCount(game.getPiles()[whichPile - 1]);
-        }
+            gameOver = game.checkIfOver();
 
-        currentHighlightView.setPileHighlighted(false);
-        currentHighlightView = null;
+            if (game.getPiles()[whichPile - 1] == -1)
+            {
+                currentHighlightView.setCount(-1);
+                currentHighlightView.setEmpty();
+                currentHighlightView.invalidate();
+            }
+            else
+            {
+                currentHighlightView.setCount(game.getPiles()[whichPile - 1]);
+            }
 
+            currentHighlightView.setPileHighlighted(false);
+            currentHighlightView = null;
 
 
             if (whosMove.getText().equals(yourMove))
             {
-                if(!gameOver)
+                if (!gameOver)
                 {
                     whosMove.setText(otherPlayerMove);
                 }
@@ -250,7 +255,7 @@ public class PlayFragment extends Fragment
             }
             else
             {
-                if(!gameOver)
+                if (!gameOver)
                 {
                     whosMove.setText(yourMove);
                 }
@@ -261,11 +266,17 @@ public class PlayFragment extends Fragment
             }
 
 
-        if(!gameOver)
-        {
-            displaySolverInfo();
-        }
+            if (!gameOver)
+            {
+                displaySolverInfo();
+            }
 
+            changed = true;
+        }
+        else
+        {
+            Toast.makeText(getContext(), "Invalid move. Please try again.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void displaySolverInfo()
@@ -460,22 +471,8 @@ public class PlayFragment extends Fragment
 
         if (title.equals(saveStr))
         {
-            String[] values = {Arrays.toString(game.getPiles()),
-                    Integer.toString(game.getRulesIndex()),
-                    game.getOtherPlayerName(),
-                    Integer.toString(game.getMove())};
-            ContentValues cv = MainActivity.createData(NimGame.no_id_projection, values);
-
-            // TODO check if this is right
-            // Goes and looks for the game and updates it
-
-
-            getActivity().getContentResolver().update(NimGame.CONTENT_URI_game, cv,
-                    NimGame.MOVE + "=? AND " +
-                            NimGame.OPPONENT + "=? AND " +
-                            NimGame.PILES + "=? AND " +
-                            NimGame.RULES_INDEX + "=?", selectionArgs);
-            saveGame(game);
+            saveGame();
+            changed = false;
             return false;
         }
         else if (title.equals(helpStr))
@@ -502,11 +499,24 @@ public class PlayFragment extends Fragment
 
     }
 
-    public void saveGame(NimGame game)
+    public void saveGame()
     {
-        // Check if already saved (should be saved at very beginning)
+        String[] values = {Arrays.toString(game.getPiles()),
+                Integer.toString(game.getRulesIndex()),
+                game.getOtherPlayerName(),
+                Integer.toString(game.getMove())};
+        ContentValues cv = MainActivity.createData(NimGame.no_id_projection, values);
 
-        // Update the current entry
+        // TODO check if this is right
+        // Goes and looks for the game and updates it
+
+
+        getActivity().getContentResolver().update(NimGame.CONTENT_URI_game, cv,
+                NimGame.MOVE + "=? AND " +
+                        NimGame.OPPONENT + "=? AND " +
+                        NimGame.PILES + "=? AND " +
+                        NimGame.RULES_INDEX + "=?", selectionArgs);
+        changed = false;
     }
 
     @Override
@@ -535,5 +545,13 @@ public class PlayFragment extends Fragment
     public interface OnGamePlayListener
     {
         void onGameOver();
+    }
+
+    public void checkIfWantToSave()
+    {
+        if(changed == true)
+        {
+
+        }
     }
 }

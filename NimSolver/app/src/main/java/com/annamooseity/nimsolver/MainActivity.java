@@ -1,10 +1,13 @@
 package com.annamooseity.nimsolver;
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.net.Uri;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +20,7 @@ import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * MainActivity.java
@@ -265,5 +269,65 @@ public class MainActivity extends AppCompatActivity
     public void goBack()
     {
         super.onBackPressed();
+    }
+
+
+    boolean processed = false;
+    @Override
+    public void onBackPressed() {
+        List<Fragment> fragmentList = getSupportFragmentManager().getFragments();
+        final AppCompatActivity activity = this;
+
+        if(processed == true)
+        {
+            super.onBackPressed();
+            processed = false;
+        }
+        boolean foundPlayFragment = false;
+
+        if (fragmentList != null) {
+            //TODO: Perform your logic to pass back press here
+            for(final Fragment fragment : fragmentList){
+                if(fragment instanceof PlayFragment){
+                    foundPlayFragment = true;
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+                    dialog.setMessage("Do you want to save before you leave?");
+                    dialog.setPositiveButton("Save", new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i)
+                        {
+                            ((PlayFragment) (fragment)).saveGame();
+                            processed = true;
+                            activity.onBackPressed();
+                            return;
+                        }
+                    });
+
+                    dialog.setNegativeButton("No", new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i)
+                        {
+                            activity.onBackPressed();
+                            processed = true;
+                            return;
+                        }
+                    });
+
+                    dialog.setNeutralButton("Cancel", null);
+
+                    dialog.show();
+                }
+            }
+
+            if(!foundPlayFragment)
+            {
+                super.onBackPressed();
+            }
+
+        }
+
+
     }
 }
