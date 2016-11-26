@@ -15,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import java.util.Arrays;
+
 
 /**
  * GameListFrag.java
@@ -57,17 +59,25 @@ public class GameListFrag extends ListFragment implements LoaderManager.LoaderCa
 
                 final int index = i + 1;
                 AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
-
-                dialog.setMessage("Delete your game with " + dataAdapter.getGameWithoutRules(i).getOtherPlayerName() + "?");
+                final NimGame game = dataAdapter.getGameWithoutRules(i);
+                dialog.setMessage("Delete your game with " + game.getOtherPlayerName() + "?");
                 dialog.setPositiveButton("Delete", new DialogInterface.OnClickListener()
                 {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i)
                     {
-                        String[] args = {Integer.toString(index)};
-                        getActivity().getContentResolver().delete(NimGame.CONTENT_URI_game, NimGame.GAME_ID + "=" + index, null);
+                        String[] args = {game.getOtherPlayerName(),
+                                Arrays.toString(game.getPiles()),
+                                Integer.toString(game.getMove()),
+                                Integer.toString(game.getRulesIndex())};
+                        getActivity().getContentResolver().delete(NimGame.CONTENT_URI_game,
+                                NimGame.OPPONENT + "=? AND " +
+                                NimGame.PILES + "=? AND " +
+                                NimGame.MOVE + "=? AND " +
+                                NimGame.RULES_INDEX + "=?", args);
                     }
                 });
+
 
                 dialog.setNegativeButton("Cancel", null);
                 dialog.show();

@@ -68,15 +68,20 @@ public class RulesListFrag extends ListFragment implements LoaderManager.LoaderC
 
                 final int index = i + 1;
                 AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
-
-                dialog.setMessage("Delete your rules with piles " + Arrays.toString(dataAdapter.getRules(i).getPiles()) + "?");
+                final NimRules rules = dataAdapter.getRules(i);
+                dialog.setMessage("Delete your rules with piles " + Arrays.toString(rules.getPiles()) + "?");
                 dialog.setPositiveButton("Delete", new DialogInterface.OnClickListener()
                 {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i)
                     {
-                        String[] args = {Integer.toString(index)};
-                        getActivity().getContentResolver().delete(NimRules.CONTENT_URI_rules, NimRules.RULES_ID + "=?", args);
+                        String[] args = {Arrays.toString(rules.getPiles()),
+                                Arrays.toString(rules.getTakeOptions()),
+                                Integer.toString(rules.getFirstPlayer())};
+                        getActivity().getContentResolver().delete(NimRules.CONTENT_URI_rules,
+                                NimRules.PILES + "=? AND "
+                                + NimRules.TAKE_OPTIONS + "=? AND "
+                                + NimRules.PLAYER_FIRST + "=?", args);
                     }
                 });
 
