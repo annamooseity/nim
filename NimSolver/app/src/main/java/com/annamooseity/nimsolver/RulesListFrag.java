@@ -121,7 +121,20 @@ public class RulesListFrag extends ListFragment implements LoaderManager.LoaderC
     {
         super.onListItemClick(l, v, position, id);
 
-        mListener.onNewGameWithRules(dataAdapter.getRuleId(position), dataAdapter.getRules(position));
+       NimRules rules = dataAdapter.getRules(position);
+
+        String[] args = {Arrays.toString(rules.getPiles()),
+            Arrays.toString(rules.getTakeOptions()),
+            Integer.toString(rules.getFirstPlayer())};
+       Cursor c =  getActivity().getContentResolver().query(NimRules.CONTENT_URI_rules, NimRules.projection,
+                NimRules.PILES + "=? AND "
+                        + NimRules.TAKE_OPTIONS + "=? AND "
+                        + NimRules.PLAYER_FIRST + "=?", args, null);
+
+        c.moveToFirst();
+        int i = Integer.parseInt(c.getString(c.getColumnIndex(NimRules.RULES_ID)));
+        mListener.onNewGameWithRules(i, rules);
+        c.close();
     }
 
     @Override

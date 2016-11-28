@@ -108,7 +108,7 @@ public class GameListFrag extends ListFragment implements LoaderManager.LoaderCa
         dialog.setMessage("Load your game with " + dataAdapter.getGameWithoutRules(position).getOtherPlayerName() + "?");
         NimGame game = (dataAdapter.getGameWithoutRules(index));
 
-    String[] args = {Integer.toString(game.getRulesIndex() + 1)};
+    String[] args = {Integer.toString(game.getRulesIndex())};
 
         Cursor rulesCursor = getActivity().getContentResolver().query(NimRules.CONTENT_URI_rules, NimRules.projection, NimRules.RULES_ID + " =?", args, null);
         rulesCursor.moveToFirst();
