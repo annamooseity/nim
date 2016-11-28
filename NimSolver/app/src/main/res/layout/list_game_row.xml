@@ -29,7 +29,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Last played on whenever"
-        android:id="@+id/lastPlayedOn_gameList"
+        android:id="@+id/takeOptions_gameList"
         />
 </LinearLayout>

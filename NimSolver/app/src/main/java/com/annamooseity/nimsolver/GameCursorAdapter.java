@@ -34,16 +34,38 @@ public class GameCursorAdapter extends CursorAdapter
     public void bindView(View view, Context context, Cursor cursor)
     {
         TextView opponent = (TextView) view.findViewById(R.id.opponent_gameList);
-        TextView numPiles = (TextView) view.findViewById(R.id.numPiles_gameList);
-        TextView lastPlayedOn = (TextView) view.findViewById(R.id.lastPlayedOn_gameList);
+        TextView piles = (TextView) view.findViewById(R.id.numPiles_gameList);
         TextView moves = (TextView) view.findViewById(R.id.moves_gameList);
 
         NimGame game = getGameWithoutRules(cursor.getPosition());
         if(game != null) {
-            moves.setText(Integer.toString(game.getMove()));
+            moves.setText("Currently on move " + Integer.toString(game.getMove()) + ".");
             //lastPlayedOn.setText(game.getLastPlayedOn());
-            numPiles.setText(Integer.toString(game.getPiles().length));
-            opponent.setText(game.getOtherPlayerName());
+
+
+            String str = "Piles of ";
+            int[] pileArray = game.getPiles();
+            boolean firstComma = true;
+            for (int i = 0; i < 6; i++)
+            {
+                if(pileArray[i] != 0 || pileArray[i] != -1)
+                {
+                    if(firstComma)
+                    {
+                        str = str + Integer.toString(pileArray[i]);
+                        firstComma = false;
+                    }
+                    else
+                    {
+                        str = str + ", " + Integer.toString(pileArray[i]);
+                    }
+                }
+            }
+
+            str = str + " chip(s)";
+            piles.setText(str);
+
+            opponent.setText("Game against " + game.getOtherPlayerName());
         }
     }
 

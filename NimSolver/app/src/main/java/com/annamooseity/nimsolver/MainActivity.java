@@ -11,8 +11,11 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
@@ -123,14 +126,8 @@ public class MainActivity extends AppCompatActivity
       //  final Switch dialogSwitch = (Switch) dialogView.findViewById(R.id.aiSwitch);
        // final ViewSwitcher playAISwitcher = (ViewSwitcher) dialogView.findViewById(R.id.playerNameSwitcher);
         final EditText otherPlayer = (EditText) dialogView.findViewById(R.id.otherPlayerName_dialog);
-       /* dialogSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
-        {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b)
-            {
-                playAISwitcher.showNext();
-            }
-        }); */
+
+
         builder.setTitle("Start a New Game");
         builder.setView(dialogView);
         builder.setPositiveButton("Let's go!", new DialogInterface.OnClickListener()
@@ -138,15 +135,10 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(DialogInterface dialogInterface, int i)
             {
-                String otherPlayerName = "";
-      /*          if(!dialogSwitch.isChecked())
-                {
-                    otherPlayerName = otherPlayer.getText().toString();
-                }*/
-
+                String otherPlayerName = otherPlayer.getText().toString();
                 // save a copy of the new game
 
-                NimGame game = new NimGame(rules, rules.getPiles(), 0, otherPlayerName, position + 1);
+                NimGame game = new NimGame(rules, rules.getPiles(), 0, otherPlayerName, position);
                 String[] values = {Arrays.toString(game.getPiles()),
                         Integer.toString(game.getRulesIndex()),
                         game.getOtherPlayerName(),
@@ -165,7 +157,36 @@ public class MainActivity extends AppCompatActivity
         });
         builder.setNegativeButton("Cancel", null);
 
-        builder.show();
+        final AlertDialog dialog = builder.show();
+
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+        otherPlayer.addTextChangedListener(new TextWatcher()
+        {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2)
+            {
+                // do nothing
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2)
+            {
+                if(otherPlayer.getText().length() < 1)
+                {
+                    dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+                }
+                else
+                {
+                    dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(true);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable)
+            {
+                // do nothing
+            }
+        });
     }
 
     /**
@@ -288,7 +309,7 @@ public class MainActivity extends AppCompatActivity
         if (fragmentList != null) {
             //TODO: Perform your logic to pass back press here
             for(final Fragment fragment : fragmentList){
-                if(fragment instanceof PlayFragment){
+                if(fragment instanceof PlayFragment && ((PlayFragment) fragment).changed){
                     foundPlayFragment = true;
                     AlertDialog.Builder dialog = new AlertDialog.Builder(this);
                     dialog.setMessage("Do you want to save before you leave?");
@@ -310,8 +331,9 @@ public class MainActivity extends AppCompatActivity
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i)
                         {
-                            activity.onBackPressed();
                             processed = true;
+                            activity.onBackPressed();
+
                             return;
                         }
                     });

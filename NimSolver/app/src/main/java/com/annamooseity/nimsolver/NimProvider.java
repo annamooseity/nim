@@ -201,11 +201,7 @@ public class NimProvider extends ContentProvider
             case GAME_ID:
                 qb.setTables(GAME_TABLE_NAME);
                 qb.setProjectionMap( gameProjectionMap);
-                if (selection != null)
-                {
-                    selection = selection + "_id = " + uri.getLastPathSegment();
-                }
-                notifyUri = NimGame.CONTENT_URI_game;
+              notifyUri = NimGame.CONTENT_URI_game;
                 break;
             case RULES:
                 qb.setTables(RULES_TABLE_NAME);

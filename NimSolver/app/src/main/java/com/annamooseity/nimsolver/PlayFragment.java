@@ -362,9 +362,13 @@ public class PlayFragment extends Fragment
             }
         }
 
-        if(currentPlayerWins && currentPlayer == 1)
+        if(currentPlayerWins && currentPlayer == 1 && !gameOver)
         {
-            str = str + " To continue winning, take " + optimalMove.second + " chip(s) from Pile " + (optimalMove.first + 1);
+            str = str + "\nTo continue winning, take " + optimalMove.second + " chip(s) from Pile " + (optimalMove.first + 1 + ".");
+        }
+        else if (gameOver)
+        {
+            str = "";
         }
         advice.setText(str);
     }

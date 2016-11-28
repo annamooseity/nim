@@ -117,4 +117,17 @@ public class RulesCursorAdapter extends CursorAdapter
 
 
     }
+
+
+    public int getRuleId(int position)
+    {
+        if(getCursor().moveToPosition(position))
+        {
+           return Integer.parseInt(getCursor().getString(getCursor().getColumnIndex(NimRules.RULES_ID)));
+        }
+        else
+        {
+            return -1;
+        }
+    }
 }

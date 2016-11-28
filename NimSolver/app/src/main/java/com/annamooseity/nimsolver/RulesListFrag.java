@@ -66,27 +66,42 @@ public class RulesListFrag extends ListFragment implements LoaderManager.LoaderC
             public boolean onItemLongClick(AdapterView adapterView, View view, int i, long l)
             {
 
-                final int index = i + 1;
-                AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
-                final NimRules rules = dataAdapter.getRules(i);
-                dialog.setMessage("Delete your rules with piles " + Arrays.toString(rules.getPiles()) + "?");
-                dialog.setPositiveButton("Delete", new DialogInterface.OnClickListener()
-                {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i)
-                    {
-                        String[] args = {Arrays.toString(rules.getPiles()),
-                                Arrays.toString(rules.getTakeOptions()),
-                                Integer.toString(rules.getFirstPlayer())};
-                        getActivity().getContentResolver().delete(NimRules.CONTENT_URI_rules,
-                                NimRules.PILES + "=? AND "
-                                + NimRules.TAKE_OPTIONS + "=? AND "
-                                + NimRules.PLAYER_FIRST + "=?", args);
-                    }
-                });
+                final int index = i;
+                String[] args = {Integer.toString(index)};
+                Cursor cursor = getActivity().getContentResolver().query(NimGame.CONTENT_URI_game, NimGame.projection,
+                        NimGame.RULES_INDEX + "=?", args, null);
 
-                dialog.setNegativeButton("Cancel", null);
-                dialog.show();
+                if(cursor != null && cursor.getCount() > 0)
+                {
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+                    dialog.setMessage("You cannot delete these rules because they are being used in a saved game. To delete these rules, first delete any such games.");
+                    dialog.setNeutralButton("Okay", null);
+                    dialog.show();
+                }
+                else
+                {
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+                    final NimRules rules = dataAdapter.getRules(i);
+                    dialog.setMessage("Delete your rules with piles " + Arrays.toString(rules.getPiles()) + "?");
+                    dialog.setPositiveButton("Delete", new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i)
+                        {
+                            String[] args = {Arrays.toString(rules.getPiles()),
+                                    Arrays.toString(rules.getTakeOptions()),
+                                    Integer.toString(rules.getFirstPlayer())};
+                            getActivity().getContentResolver().delete(NimRules.CONTENT_URI_rules,
+                                    NimRules.PILES + "=? AND "
+                                            + NimRules.TAKE_OPTIONS + "=? AND "
+                                            + NimRules.PLAYER_FIRST + "=?", args);
+                        }
+                    });
+
+                    dialog.setNegativeButton("Cancel", null);
+                    dialog.show();
+                }
+                cursor.close();
                 return true;
             }
         });
@@ -106,7 +121,7 @@ public class RulesListFrag extends ListFragment implements LoaderManager.LoaderC
     {
         super.onListItemClick(l, v, position, id);
 
-        mListener.onNewGameWithRules(position + 1, dataAdapter.getRules(position));
+        mListener.onNewGameWithRules(dataAdapter.getRuleId(position), dataAdapter.getRules(position));
     }
 
     @Override
