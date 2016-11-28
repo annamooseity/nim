@@ -100,7 +100,7 @@ public class PlayFragment extends Fragment
 
         gameOver = game.checkIfOver();
         selectionArgs = new String[]{Integer.toString(game.getMove()), game.getOtherPlayerName(), Arrays.toString(game.getPiles()), Integer.toString(game.getRulesIndex())};
-        displaySolverInfo();
+
 
         // If moveMod is zero, first player's turn
         // Otherwise it's the second player's turn
@@ -160,6 +160,8 @@ public class PlayFragment extends Fragment
                 }
             }
         }
+
+        displaySolverInfo();
 
         return thisView;
     }
@@ -332,34 +334,21 @@ public class PlayFragment extends Fragment
             currentPlayer = 2;
         }
 
-        // prep for players next move
-        if(currentPlayerWins)
+        if(currentPlayer == 1)
         {
-            switch(currentPlayer)
+            // prep for players next move
+            if (currentPlayerWins)
             {
-                case 1:
-                    str = str + "you will win!";
-                    break;
-                case 2:
-                    str = str + game.getOtherPlayerName() + " will win!";
-                    break;
-                default:
-                    break;
+                str = str + "you will win!";
+            }
+            else
+            {
+                str = str + game.getOtherPlayerName() + " will win!";
             }
         }
         else
         {
-            switch(currentPlayer)
-            {
-                case 2:
-                    str = str + "you will win!";
-                    break;
-                case 1:
-                    str = str + game.getOtherPlayerName() + " will win!";
-                    break;
-                default:
-                    break;
-            }
+            str = "";
         }
 
         if(currentPlayerWins && currentPlayer == 1 && !gameOver)
