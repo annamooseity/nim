@@ -10,11 +10,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/turnDisplay"
-        android:textSize="30dp"
+        android:textSize="26dp"
+        android:layout_margin="15dp"
+        android:gravity="center"
         android:text="Player Whoever's Turn"/>
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="5dp"
         android:layout_height="wrap_content"
         android:layout_weight="2"
         android:orientation="vertical">
@@ -76,13 +81,25 @@
 
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/separatorLine"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"/>
+
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:id="@+id/outcomeInfo"
-        android:textSize="20dp"
+        android:textSize="15dp"
+        android:textStyle="italic"
         android:layout_marginBottom="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:text="Outcome here blah blah"
         />
 
@@ -93,11 +110,15 @@
         android:layout_marginBottom="10dp"
         android:id="@+id/messageToUser"
         android:textSize="20dp"
+        android:textStyle="italic"
+        android:layout_marginLeft="20dp"
         android:text="How many chips do you want to take?"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:orientation="horizontal">
 
     <Spinner
@@ -105,9 +126,10 @@
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginBottom="30dp"
         android:textSize="20dp"
-        android:layout_alignParentBottom="true"
         android:id="@+id/takeOptionsSpinner">
     </Spinner>
 
@@ -115,6 +137,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Take!"
+            android:textStyle="bold"
+            android:textSize="15dp"
             android:id="@+id/takeTheChipsButton"/>
 
 

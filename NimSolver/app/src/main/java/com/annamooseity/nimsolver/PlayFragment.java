@@ -84,7 +84,7 @@ public class PlayFragment extends Fragment
 
         takeChipsSpinner = (Spinner) thisView.findViewById(R.id.takeOptionsSpinner);
 
-        takeChipsSpinner.setAdapter(new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, takeOptions));
+        takeChipsSpinner.setAdapter(new ArrayAdapter<String>(getContext(), R.layout.spinner_item, takeOptions));
         takeChipsButton = (Button) thisView.findViewById(R.id.takeTheChipsButton);
         takeChipsButton.setOnClickListener(new View.OnClickListener()
         {
@@ -172,7 +172,7 @@ public class PlayFragment extends Fragment
         int[] piles = game.getPiles();
         int numPiles = 6;
 
-        for (int i = 1; i < 6; i++)
+        for (int i = 1; i < 7; i++)
         {
             if(piles[i - 1] == 0)
             {
@@ -441,8 +441,6 @@ public class PlayFragment extends Fragment
                 pile3.setOnClickListener(pileListener);
                 pile4.setOnClickListener(pileListener);
                 pile5.setOnClickListener(pileListener);
-
-
                 break;
             default:
                 pile1.setOnClickListener(pileListener);

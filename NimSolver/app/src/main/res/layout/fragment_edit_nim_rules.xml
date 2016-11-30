@@ -1,260 +1,309 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="com.annamooseity.nimsolver.EditNimRules">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="com.annamooseity.nimsolver.EditNimRules">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="New Set of Nim Rules"
         android:id="@+id/title"
-        android:layout_marginTop="22dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"/>
-
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="How many piles?"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:text="New Set of Nim Rules"
+        android:textColor="@color/separatorLine"
+        android:textSize="23dp"
+        android:textStyle="bold"/>
+
+    <TextView
         android:id="@+id/howManyPilesTxt"
-        android:layout_below="@+id/title"
-        android:textSize="20dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="18dp"/>
-
-    <TextView
-        android:layout_width="30dp"
-        android:textSize="22dp"
-        android:textColor="@color/colorAccent"
-        android:layout_height="wrap_content"
-        android:text="1"
-        android:id="@+id/sliderText"
-        android:layout_alignBottom="@+id/howManyPilesTxt"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"/>
-
-    <SeekBar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/numPilePicker"
-        android:layout_below="@+id/howManyPilesTxt"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:max="5"
-        android:theme="@style/Widget.AppCompat.SeekBar.Discrete"
-        android:layout_marginTop="16dp"/>
-
-
-
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pile 1"
-        android:id="@+id/lPile1"
-        android:layout_below="@+id/numPilePicker"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textSize="20dp"
-        android:layout_marginTop="20dp"/>
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:text="How many piles of chips do you want?"
+        android:textSize="15dp"
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/pile1"
-        android:layout_toEndOf="@+id/lPile1"
-        android:layout_toRightOf="@+id/lPile1"
-        android:layout_toStartOf="@+id/lPile4"
-        android:layout_toLeftOf="@+id/lPile4"
-        android:inputType="number"
-        android:layout_alignBaseline="@+id/lPile1"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Pile 4"
-        android:id="@+id/lPile4"
-        android:layout_alignTop="@+id/lPile1"
-        android:textSize="20dp"
-        android:layout_centerHorizontal="true"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/pile4"
-        android:layout_toEndOf="@+id/lPile4"
-        android:layout_toRightOf="@+id/lPile4"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:inputType="number"
-        android:layout_alignBaseline="@+id/lPile4"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Pile 2"
-        android:id="@+id/lPile2"
-        android:textSize="20dp"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/lPile1"
-        android:layout_marginRight="81dp"
-        android:layout_marginEnd="81dp"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/pile2"
-        android:layout_toEndOf="@+id/lPile1"
-        android:layout_toRightOf="@+id/lPile1"
-        android:layout_toStartOf="@+id/lPile4"
-        android:layout_toLeftOf="@+id/lPile4"
-        android:inputType="number"
-        android:layout_alignBaseline="@+id/lPile2"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Pile 5"
-        android:textSize="20dp"
-        android:id="@+id/lPile5"
-        android:layout_above="@+id/lPile3"
-        android:layout_alignRight="@+id/lPile4"
-        android:layout_alignEnd="@+id/lPile4"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/pile5"
-        android:layout_toEndOf="@+id/lPile4"
-        android:layout_toRightOf="@+id/lPile4"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:inputType="number"
-        android:layout_alignBaseline="@+id/lPile5"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Pile 3"
-        android:textSize="20dp"
-        android:id="@+id/lPile3"
-        android:layout_below="@+id/lPile2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/pile3"
-        android:layout_toEndOf="@+id/lPile1"
-        android:layout_toRightOf="@+id/lPile1"
-        android:layout_toStartOf="@+id/lPile4"
-        android:layout_toLeftOf="@+id/lPile4"
-        android:inputType="number"
-        android:layout_alignBaseline="@+id/lPile3"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Pile 6"
-        android:textSize="20dp"
-        android:id="@+id/lPile6"
-        android:layout_centerHorizontal="true"
-        android:layout_alignBottom="@+id/lPile3"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/pile6"
-        android:layout_toEndOf="@+id/lPile4"
-        android:layout_toRightOf="@+id/lPile4"
-        android:layout_alignParentEnd="true"
-        android:inputType="number"
-        android:layout_alignParentRight="true"
-        android:layout_alignBaseline="@+id/lPile6"/>
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/lPile3"
-        android:textSize="20dp"
-        android:layout_marginTop="10dp"
-        android:id="@+id/howManyCanYouTakeTxt"
-        android:text="How many chips can you take per turn?"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="18dp"
-        android:hint="Separate values with commas."
-        android:inputType="number"
-        android:digits="1234567890,"
-        android:layout_below="@id/howManyCanYouTakeTxt"
-        android:id="@+id/takeOptions"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Who Plays First?"
-        android:id="@+id/whoPlaysFirstText"
-        android:textSize="20dp"
-        android:layout_below="@+id/takeOptions"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="24dp"/>
-
-    <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/radioGroup"
-        android:layout_below="@+id/whoPlaysFirstText"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="You"
-            android:textSize="20dp"
-            android:id="@+id/player1Radio"
-            android:checked="true"/>
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Other Player"
-            android:textSize="20dp"
-            android:id="@+id/player2Radio"
-            android:checked="false"/>
-    </RadioGroup>
+        android:textStyle="italic"/>
 
     <LinearLayout
-        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-
-        <Button
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:id="@+id/saveRules"
-        android:text="Save"/>
-
-        <Button
+        <SeekBar
+            android:id="@+id/numPilePicker"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:id="@+id/cancelRules"
-            android:text="Cancel"/>
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/howManyPilesTxt"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            android:max="5"
+            android:theme="@style/Widget.AppCompat.SeekBar.Discrete"/>
+
+        <TextView
+            android:id="@+id/sliderText"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="15dp"
+            android:text="1"
+            android:textColor="@color/colorAccent"
+            android:textSize="22dp"/>
 
     </LinearLayout>
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        >
 
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/lPile1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="1"
+            android:text="Pile 1"
+            android:textSize="20dp"/>
+
+        <EditText
+            android:id="@+id/pile1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:inputType="number"/>
+
+        <TextView
+            android:id="@+id/lPile4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Pile 4"
+            android:textSize="20dp"/>
+
+        <EditText
+            android:id="@+id/pile4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:inputType="number"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/lPile2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="1"
+            android:text="Pile 2"
+            android:textSize="20dp"
+            />
+
+        <EditText
+            android:id="@+id/pile2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:inputType="number"/>
+
+        <TextView
+            android:id="@+id/lPile5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Pile 5"
+            android:textSize="20dp"/>
+
+        <EditText
+            android:id="@+id/pile5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:inputType="number"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/lPile3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="1"
+            android:text="Pile 3"
+            android:textSize="20dp"/>
+
+        <EditText
+            android:id="@+id/pile3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:inputType="number"/>
+
+        <TextView
+            android:id="@+id/lPile6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Pile 6"
+            android:textSize="20dp"/>
+
+        <EditText
+            android:id="@+id/pile6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"
+
+            android:layout_weight="1"
+            android:inputType="number"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/separatorLine"/>
+
+    <TextView
+        android:id="@+id/howManyCanYouTakeTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="How many chips can you take per turn?"
+        android:textSize="15dp"
+        android:textStyle="italic"/>
+
+    <EditText
+        android:id="@+id/takeOptions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:digits="1234567890,"
+        android:hint="Separate values with commas."
+        android:inputType="number"
+        android:textSize="18dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/separatorLine"/>
+
+    <TextView
+        android:id="@+id/whoPlaysFirstText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="Which player takes the first chip(s)?"
+        android:textSize="15dp"
+        android:textStyle="italic"/>
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        >
+
+        <RadioButton
+            android:id="@+id/player1Radio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="You"
+            android:textColor="@color/textColor"
+            android:textSize="20dp"/>
+
+        <RadioButton
+            android:id="@+id/player2Radio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:text="Other Player"
+            android:textColor="@color/textColor"
+            android:textSize="20dp"/>
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/cancelRules"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Cancel"/>
+
+            <Button
+                android:id="@+id/saveRules"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Save"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

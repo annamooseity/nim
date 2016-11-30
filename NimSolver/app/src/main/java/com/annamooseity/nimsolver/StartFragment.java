@@ -15,7 +15,6 @@ import android.view.ViewGroup;
  * Anna Carrigan
  *
  *
- *
  * The start page for the nim application.
  *
  * New Game - Start a new game from the provided rules (or create new rules)
