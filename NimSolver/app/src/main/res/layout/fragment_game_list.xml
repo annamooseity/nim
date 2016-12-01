@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:gravity="center"
-        android:text="Tap and hold to delete a game."
+        android:text="Tap to load game. \n Tap and hold to delete a game."
         android:textSize="15dp"/>
 
     <View

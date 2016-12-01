@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:gravity="center"
-        android:text="Tap and hold to delete a set of rules."
+        android:text="Tap to start a new game. \n Tap and hold to delete a set of rules."
         android:textSize="15dp"/>
 
     <View
