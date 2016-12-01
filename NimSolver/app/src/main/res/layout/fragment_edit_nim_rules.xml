@@ -12,7 +12,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="8dp"
         android:text="New Set of Nim Rules"
-        android:textColor="@color/separatorLine"
+        android:textColor="@color/colorAccent"
         android:textSize="23dp"
         android:textStyle="bold"/>
 
@@ -198,20 +198,13 @@
 
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/separatorLine"/>
 
     <TextView
         android:id="@+id/howManyCanYouTakeTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:text="How many chips can you take per turn?"
         android:textSize="15dp"
         android:textStyle="italic"/>
@@ -227,20 +220,13 @@
         android:inputType="number"
         android:textSize="18dp"/>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/separatorLine"/>
 
     <TextView
         android:id="@+id/whoPlaysFirstText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:text="Which player takes the first chip(s)?"
         android:textSize="15dp"
         android:textStyle="italic"/>

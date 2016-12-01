@@ -39,7 +39,14 @@ public class GameCursorAdapter extends CursorAdapter
 
         NimGame game = getGameWithoutRules(cursor.getPosition());
         if(game != null) {
-            moves.setText("Currently on move " + Integer.toString(game.getMove()) + ".");
+            if(game.getMove() == 0)
+            {
+                moves.setText("No moves yet.");
+            }
+            else
+            {
+                moves.setText("Currently on move " + Integer.toString(game.getMove()) + ".");
+            }
             //lastPlayedOn.setText(game.getLastPlayedOn());
 
 
@@ -48,7 +55,7 @@ public class GameCursorAdapter extends CursorAdapter
             boolean firstComma = true;
             for (int i = 0; i < 6; i++)
             {
-                if(pileArray[i] != 0 || pileArray[i] != -1)
+                if(pileArray[i] != 0 && pileArray[i] != -1)
                 {
                     if(firstComma)
                     {

@@ -3,29 +3,29 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
+              android:layout_margin="10dp"
               tools:context="com.annamooseity.nimsolver.GameListFrag">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
         android:text="Saved Games"
+        android:gravity="center"
         android:textColor="@color/colorAccent"
         android:textSize="23dp"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="28dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center"
         android:text="Tap and hold to delete a game."
         android:textSize="15dp"/>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
         android:layout_marginTop="7dp"
         android:background="@color/separatorLine"/>
 

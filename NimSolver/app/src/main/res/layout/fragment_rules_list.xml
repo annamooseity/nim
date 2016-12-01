@@ -1,48 +1,49 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context=".RulesListFrag"
-             android:orientation="vertical">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_margin="10dp"
+              android:orientation="vertical"
+              tools:context=".RulesListFrag">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
+        android:gravity="center"
         android:layout_marginTop="10dp"
         android:text="Saved Rule Sets"
-        android:textSize="23dp"
-        android:textColor="@color/colorAccent"/>
+        android:textColor="@color/colorAccent"
+        android:textSize="23dp"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="28dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center"
         android:text="Tap and hold to delete a set of rules."
         android:textSize="15dp"/>
 
     <View
-        android:layout_marginTop="7dp"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
+        android:layout_marginTop="7dp"
         android:background="@color/separatorLine"/>
 
     <ListView
         android:id="@android:id/list"
-        android:layout_height="0dip"
         android:layout_width="match_parent"
+        android:layout_height="0dip"
         android:layout_weight="1"
-        tools:context=".MainActivity"
+        android:clickable="true"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:clickable="true"/>
+        tools:context=".MainActivity"/>
 
     <Button
+        android:id="@+id/addRules"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/addRules"
-        android:textSize="20dp"
-        android:text="Add New Set of Rules"/>
+        android:layout_marginBottom="5dp"
+        android:text="Add New Set of Rules"
+        android:textSize="20dp"/>
 </LinearLayout>

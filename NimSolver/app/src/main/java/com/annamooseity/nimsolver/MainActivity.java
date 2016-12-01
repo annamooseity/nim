@@ -50,8 +50,6 @@ public class MainActivity extends AppCompatActivity
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.container, new StartFragment())
                 .commit();
-
-       getSupportActionBar().hide();
     }
 
     @Override
