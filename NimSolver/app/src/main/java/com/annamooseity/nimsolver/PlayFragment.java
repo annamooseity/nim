@@ -430,7 +430,7 @@ public class PlayFragment extends Fragment
                 pile2.setOnClickListener(pileListener);
                 pile3.setOnClickListener(pileListener);
                 pile4.setOnClickListener(pileListener);
-                pile5.setLayoutParams(all);
+                pile4.setLayoutParams(all);
                 break;
             case 5:
                 pile6.setVisibility(View.GONE);

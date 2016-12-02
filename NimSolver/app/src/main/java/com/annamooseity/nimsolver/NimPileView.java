@@ -82,7 +82,7 @@ public class NimPileView extends View
         }
         else
         {
-            paint.setColor(Color.parseColor("#E0E0E0"));
+            paint.setColor(Color.parseColor("#9E9E9E"));
             str = "Empty!";
             paint.setTextSize(canvas.getHeight() * 0.13f);
         }

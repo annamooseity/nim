@@ -288,7 +288,12 @@ public class EditNimRules extends Fragment
 
             if (amt == 0) {
                 valid = false;
-                piles[i].setError("Enter a number.");
+                piles[i].setError("Enter a number between 1 and 100.");
+            }
+            else if(amt > 100)
+            {
+                valid = false;
+                piles[i].setError("Enter a number between 1 and 100.");
             }
             else {
                 piles[i].setError(null);

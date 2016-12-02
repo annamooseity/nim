@@ -41,11 +41,11 @@ public class GameCursorAdapter extends CursorAdapter
         if(game != null) {
             if(game.getMove() == 0)
             {
-                moves.setText("No moves yet.");
+                moves.setText("No moves yet");
             }
             else
             {
-                moves.setText("Currently on move " + Integer.toString(game.getMove()) + ".");
+                moves.setText("Currently on move " + Integer.toString(game.getMove()));
             }
             //lastPlayedOn.setText(game.getLastPlayedOn());
 
@@ -70,6 +70,11 @@ public class GameCursorAdapter extends CursorAdapter
             }
 
             str = str + " chip(s)";
+
+            if(str.equals("Piles of  chip(s)"))
+            {
+                str = "All piles are empty.";
+            }
             piles.setText(str);
 
             opponent.setText("Game against " + game.getOtherPlayerName());
