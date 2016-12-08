@@ -506,7 +506,6 @@ public class PlayFragment extends Fragment
     {
         MenuItem saveGame = menu.add(saveStr);
         MenuItem help = menu.add(helpStr);
-        MenuItem restart = menu.add(restartStr);
     }
 
     /**
@@ -530,11 +529,6 @@ public class PlayFragment extends Fragment
         else if (title.equals(helpStr))
         {
             MainActivity.displayHelpDialog(getContext());
-            return false;
-        }
-        else if (title.equals(restartStr))
-        {
-            restart();
             return false;
         }
         else
